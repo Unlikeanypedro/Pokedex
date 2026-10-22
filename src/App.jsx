@@ -1,79 +1,92 @@
-import { useState } from "react";
-import data from "./data/pokedex-data.json";
-import SearchBar from "./components/SearchBar";
-import TypeFilter from "./components/TypeFilter";
-import PokemonList from "./components/PokemonList";
-import PokemonDetails from "./components/PokemonDetails";
-import TrainerList from "./components/TrainerList";
-import "./App.css";
+import { useMemo, useState } from 'react'
+import data from './data/pokedex-data.json'
+import Header from './components/Header.jsx'
+import SearchBar from './components/SearchBar.jsx'
+import TypeFilter from './components/TypeFilter.jsx'
+import PokemonList from './components/PokemonList.jsx'
+import PokemonDetails from './components/PokemonDetails.jsx'
+import TrainerList from './components/TrainerList.jsx'
 
-function App() {
-    const [search, setSearch] = useState("");
-    const [type, setType] = useState("all");
-    const [selected, setSelected] = useState(null);
-    const [view, setView] = useState("pokedex"); // 'pokedex' | 'trainers'
+export default function App() {
+  const [search, setSearch] = useState('')
+  const [selectedType, setSelectedType] = useState('All')
+  const [selectedPokemon, setSelectedPokemon] = useState(null)
+  const [view, setView] = useState('pokemon')
 
-    const term = search.trim().toLowerCase();
+  const pokemonById = useMemo(() => {
+    return new Map(data.pokemon.map((pokemon) => [pokemon.id, pokemon]))
+  }, [])
 
-    const filtered = data.pokemon.filter((p) => {
-        const matchSearch =
-            term === "" ||
-            p.name.toLowerCase().includes(term) ||
-            String(p.id) === term;
+  const availableTypes = useMemo(() => {
+    const names = new Set()
 
-        const matchType =
-            type === "all" ||
-            (type === "Typeless"
-                ? p.types.length === 0
-                : p.types.some((t) => t.name === type));
+    data.pokemon.forEach((pokemon) => {
+      pokemon.types.forEach((type) => names.add(type.name))
+    })
 
-        return matchSearch && matchType;
-    });
+    return Array.from(names).sort()
+  }, [])
 
-    return (
-        <main className="app">
-            <header>
-                <h1>Pokédex</h1>
-                <nav>
-                    <button onClick={() => setView("pokedex")}>Pokémon</button>
-                    <button onClick={() => setView("trainers")}>
-                        Treinadores
-                    </button>
-                </nav>
-            </header>
+  const filteredPokemon = useMemo(() => {
+    const term = search.trim().toLowerCase()
 
-            {view === "pokedex" ? (
-                <>
-                    <div className="controls">
-                        <SearchBar value={search} onChange={setSearch} />
-                        <TypeFilter
-                            types={data.types}
-                            value={type}
-                            onChange={setType}
-                        />
-                    </div>
+    return data.pokemon.filter((pokemon) => {
+      const matchesSearch =
+        term === '' ||
+        pokemon.name.toLowerCase().includes(term) ||
+        String(pokemon.id).includes(term)
 
-                    {filtered.length === 0 ? (
-                        <p className="empty">Nenhum Pokémon encontrado.</p>
-                    ) : (
-                        <PokemonList
-                            pokemons={filtered}
-                            onSelect={setSelected}
-                        />
-                    )}
-                </>
+      const matchesType =
+        selectedType === 'All' ||
+        pokemon.types.some((type) => type.name === selectedType)
+
+      return matchesSearch && matchesType
+    })
+  }, [search, selectedType])
+
+  return (
+    <div className="app">
+      <Header view={view} onChangeView={setView} />
+
+      <main className="main">
+        {view === 'pokemon' ? (
+          <>
+            <section className="controls">
+              <SearchBar value={search} onChange={setSearch} />
+              <TypeFilter
+                types={availableTypes}
+                selectedType={selectedType}
+                onChange={setSelectedType}
+              />
+            </section>
+
+            {filteredPokemon.length > 0 ? (
+              <PokemonList
+                pokemon={filteredPokemon}
+                onSelect={setSelectedPokemon}
+              />
             ) : (
-                <TrainerList trainers={data.trainers} pokemons={data.pokemon} />
+              <div className="empty">
+                <h2>Nenhum Pokémon encontrado</h2>
+                <p>Ajuste a pesquisa ou selecione outro tipo.</p>
+              </div>
             )}
+          </>
+        ) : (
+          <TrainerList
+            trainers={data.trainers}
+            pokemonById={pokemonById}
+            onSelectPokemon={setSelectedPokemon}
+          />
+        )}
+      </main>
 
-            {selected && (
-                <PokemonDetails
-                    pokemon={selected}
-                    onClose={() => setSelected(null)}
-                />
-            )}
-        </main>
-    );
+      {selectedPokemon && (
+        <PokemonDetails
+          pokemon={selectedPokemon}
+          onClose={() => setSelectedPokemon(null)}
+        />
+      )}
+    </div>
+  )
 }
-
-export default App;

@@ -1,54 +1,75 @@
-const LABELS = {
-    hp: "HP",
-    attack: "Attack",
-    defense: "Defense",
-    specialAttack: "Special Attack",
-    specialDefense: "Special Defense",
-    speed: "Speed",
-};
+import { useEffect } from 'react'
+import { getTypeColor } from '../utils/typeColors.js'
 
-function PokemonDetails({ pokemon, onClose }) {
-    const { id, name, types, stats } = pokemon;
+const statLabels = [
+  ['hp', 'HP'],
+  ['attack', 'Ataque'],
+  ['defense', 'Defesa'],
+  ['specialAttack', 'Ataque Especial'],
+  ['specialDefense', 'Defesa Especial'],
+  ['speed', 'Velocidade'],
+]
 
-    return (
-        <div className="overlay" onClick={onClose}>
-            <div className="modal" onClick={(e) => e.stopPropagation()}>
-                <button className="close" onClick={onClose}>
-                    ✕
-                </button>
-                <h2>
-                    #{String(id).padStart(3, "0")} {name}
-                </h2>
+export default function PokemonDetails({ pokemon, onClose }) {
+  useEffect(() => {
+    const handleKey = (event) => {
+      if (event.key === 'Escape') onClose()
+    }
 
-                <div className="types">
-                    {types.length === 0 ? (
-                        <span className="type typeless">Typeless</span>
-                    ) : (
-                        types.map((t) => (
-                            <span
-                                key={t.id}
-                                className={`type ${t.name.toLowerCase()}`}
-                            >
-                                {t.name}
-                            </span>
-                        ))
-                    )}
-                </div>
+    window.addEventListener('keydown', handleKey)
+    document.body.style.overflow = 'hidden'
 
-                {Object.entries(stats).map(([key, value]) => (
-                    <div key={key} className="stat">
-                        <span className="stat-label">{LABELS[key]}</span>
-                        <span className="stat-value">{value}</span>
-                        <div className="bar">
-                            <div
-                                className="bar-fill"
-                                style={{ width: `${(value / 255) * 100}%` }}
-                            />
-                        </div>
-                    </div>
-                ))}
-            </div>
+    return () => {
+      window.removeEventListener('keydown', handleKey)
+      document.body.style.overflow = ''
+    }
+  }, [onClose])
+
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <section className="details" onClick={(event) => event.stopPropagation()}>
+        <div className="details-header">
+          <img
+            className="details-portrait"
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
+            alt={pokemon.name}
+          />
+          <div className="details-title">
+            <span className="pokemon-id">#{String(pokemon.id).padStart(3, '0')}</span>
+            <h2>{pokemon.name}</h2>
+          </div>
+          <button className="close-button" onClick={onClose} aria-label="Fechar detalhes">
+            ×
+          </button>
         </div>
-    );
+
+        <div className="details-types">
+          {pokemon.types.map((type) => (
+            <span
+              key={type.id}
+              className="type-chip"
+              style={{ background: getTypeColor(type.name) }}
+            >
+              {type.name}
+            </span>
+          ))}
+        </div>
+
+        <div className="stat-list">
+          {statLabels.map(([key, label]) => (
+            <div key={key} className="stat-row">
+              <span className="stat-name">{label}</span>
+              <div className="stat-track">
+                <div
+                  className="stat-fill"
+                  style={{ width: `${Math.min(100, (pokemon.stats[key] / 180) * 100)}%` }}
+                />
+              </div>
+              <strong>{pokemon.stats[key]}</strong>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  )
 }
-export default PokemonDetails;

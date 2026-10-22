@@ -1,16 +1,43 @@
-# React + Vite
+# Pokédex
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Aplicação web desenvolvida com React 19 e Vite 8 para exibir, pesquisar, filtrar e detalhar Pokémon a partir do arquivo `src/data/pokedex-data.json`.
 
-Currently, two official plugins are available:
+## Execução
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+npm install
+npm run dev
+```
 
-## React Compiler
+Abra `http://localhost:5173` no navegador.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Se o npm bloquear o script de instalação do `esbuild`, aprove-o e reconstrua a dependência:
 
-## Expanding the Oxlint configuration
+```bash
+npm install-scripts approve esbuild
+npm rebuild esbuild
+npm run dev
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Build
+
+```bash
+npm run build
+npm run preview
+```
+
+## Dados
+
+Os Pokémon, tipos, atributos e treinadores são carregados de `src/data/pokedex-data.json`.
+
+As imagens são obtidas pela PokéAPI, usando o ID de cada Pokémon:
+
+https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{id}.png
+
+## Organização
+
+- `src/components`: componentes React da interface.
+- `src/data`: dados locais da Pokédex.
+- `src/utils`: cores e utilidades visuais dos tipos.
+- `src/App.jsx`: estado principal, pesquisa, filtro, seleção e navegação.
+- `src/index.css`: estilos globais e responsivos.

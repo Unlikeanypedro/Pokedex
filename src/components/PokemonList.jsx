@@ -1,12 +1,15 @@
-import PokemonCard from "./PokemonCard";
+import PokemonCard from './PokemonCard.jsx'
 
-function PokemonList({ pokemons, onSelect }) {
-    return (
-        <div className="pokemon-list">
-            {pokemons.map((p) => (
-                <PokemonCard key={p.id} pokemon={p} onSelect={onSelect} />
-            ))}
-        </div>
-    );
+export default function PokemonList({ pokemon, onSelect }) {
+  return (
+    <section className="pokemon-grid">
+      {pokemon.map((item) => (
+        <PokemonCard
+          key={item.id}
+          pokemon={item}
+          onSelect={onSelect}
+        />
+      ))}
+    </section>
+  )
 }
-export default PokemonList;

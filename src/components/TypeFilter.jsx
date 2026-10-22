@@ -1,13 +1,20 @@
-function TypeFilter({ types, value, onChange }) {
-    return (
-        <select value={value} onChange={(e) => onChange(e.target.value)}>
-            <option value="all">Todos os tipos</option>
-            {types.map((t) => (
-                <option key={t.id} value={t.name}>
-                    {t.name}
-                </option>
-            ))}
-        </select>
-    );
+import { getTypeColor } from '../utils/typeColors.js'
+
+export default function TypeFilter({ types, selectedType, onChange }) {
+  const options = ['All', ...types]
+
+  return (
+    <div className="type-filter">
+      {options.map((type) => (
+        <button
+          key={type}
+          className={selectedType === type ? 'type-button active' : 'type-button'}
+          style={type === 'All' ? undefined : { borderColor: getTypeColor(type) }}
+          onClick={() => onChange(type)}
+        >
+          {type === 'All' ? 'Todos' : type}
+        </button>
+      ))}
+    </div>
+  )
 }
-export default TypeFilter;
