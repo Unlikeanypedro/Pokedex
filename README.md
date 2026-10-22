@@ -32,7 +32,7 @@ Os Pokémon, tipos, atributos e treinadores são carregados de `src/data/pokedex
 
 As imagens são obtidas pela PokéAPI, usando o ID de cada Pokémon:
 
-https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{id}.png
+`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{id}.png`
 
 ## Organização
 
