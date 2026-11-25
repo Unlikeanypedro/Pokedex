@@ -1,9 +1,16 @@
 package com.example.back.service;
 
-import com.example.back.exception.AlunoNaoEncontradoException;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.*;
+
 import com.example.back.exception.DadosInvalidosException;
-import com.example.back.model.Aluno;
-import com.example.back.repository.AlunoRepository;
+import com.example.back.exception.PokemonNaoEncontradoException;
+import com.example.back.model.Pokemon;
+import com.example.back.repository.PokemonRepository;
+import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -18,14 +25,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Sort;
 
-import java.util.List;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.*;
-
 /**
  * Testes unitários das regras de negócio do CRUD de alunos.
  * O AlunoRepository é simulado com Mockito: nenhum MongoDB é necessário.
@@ -35,20 +34,30 @@ import static org.mockito.Mockito.*;
 class AlunoServiceTest {
 
     @Mock
-    private AlunoRepository alunoRepository;
+    private PokemonRepository alunoRepository;
 
     @InjectMocks
-    private AlunoService alunoService;
+    private PokemonService alunoService;
 
-    private Aluno alunoValido;
+    private Pokemon alunoValido;
 
     @BeforeEach
     void setUp() {
-        alunoValido = new Aluno(null, "Maria", "maria@sga.pucminas.br", "Engenharia de Software");
+        alunoValido = new Pokemon(
+            null,
+            "Maria",
+            "maria@sga.pucminas.br",
+            "Engenharia de Software"
+        );
     }
 
-    private static Aluno aluno(String id, String nome) {
-        return new Aluno(id, nome, nome.toLowerCase() + "@sga.pucminas.br", "Engenharia de Software");
+    private static Pokemon aluno(String id, String nome) {
+        return new Pokemon(
+            id,
+            nome,
+            nome.toLowerCase() + "@sga.pucminas.br",
+            "Engenharia de Software"
+        );
     }
 
     // ------------------------------------------------------------------
@@ -59,10 +68,13 @@ class AlunoServiceTest {
         @Test
         @DisplayName("sem filtro: busca todos ordenados por nome")
         void semFiltro() {
-            List<Aluno> todos = List.of(aluno("1", "Ana"), aluno("2", "Bruno"));
+            List<Pokemon> todos = List.of(
+                aluno("1", "Ana"),
+                aluno("2", "Bruno")
+            );
             when(alunoRepository.findAll(Sort.by("nome"))).thenReturn(todos);
 
-            List<Aluno> resultado = alunoService.listar(null);
+            List<Pokemon> resultado = alunoService.listar(null);
 
             assertEquals(todos, resultado);
             verify(alunoRepository).findAll(Sort.by("nome"));
@@ -70,9 +82,11 @@ class AlunoServiceTest {
         }
 
         @ParameterizedTest(name = "nome = \"{0}\" é ignorado")
-        @ValueSource(strings = {"", "   ", "\t"})
+        @ValueSource(strings = { "", "   ", "\t" })
         void filtroEmBranco(String nome) {
-            when(alunoRepository.findAll(Sort.by("nome"))).thenReturn(List.of());
+            when(alunoRepository.findAll(Sort.by("nome"))).thenReturn(
+                List.of()
+            );
 
             alunoService.listar(nome);
 
@@ -83,13 +97,19 @@ class AlunoServiceTest {
         @Test
         @DisplayName("com nome: busca por nome (com trim)")
         void comNome() {
-            List<Aluno> esperado = List.of(aluno("1", "Ana"));
-            when(alunoRepository.findByNomeContainingIgnoreCaseOrderByNomeAsc("ana")).thenReturn(esperado);
+            List<Pokemon> esperado = List.of(aluno("1", "Ana"));
+            when(
+                alunoRepository.findByNomeContainingIgnoreCaseOrderByNomeAsc(
+                    "ana"
+                )
+            ).thenReturn(esperado);
 
-            List<Aluno> resultado = alunoService.listar("  ana  ");
+            List<Pokemon> resultado = alunoService.listar("  ana  ");
 
             assertEquals(esperado, resultado);
-            verify(alunoRepository).findByNomeContainingIgnoreCaseOrderByNomeAsc("ana");
+            verify(
+                alunoRepository
+            ).findByNomeContainingIgnoreCaseOrderByNomeAsc("ana");
             verifyNoMoreInteractions(alunoRepository);
         }
     }
@@ -102,7 +122,7 @@ class AlunoServiceTest {
         @Test
         @DisplayName("devolve o aluno quando o id existe")
         void encontrado() {
-            Aluno a = aluno("abc", "Maria");
+            Pokemon a = aluno("abc", "Maria");
             when(alunoRepository.findById("abc")).thenReturn(Optional.of(a));
 
             assertSame(a, alunoService.buscarPorId("abc"));
@@ -113,8 +133,10 @@ class AlunoServiceTest {
         void naoEncontrado() {
             when(alunoRepository.findById("xyz")).thenReturn(Optional.empty());
 
-            AlunoNaoEncontradoException ex = assertThrows(AlunoNaoEncontradoException.class,
-                    () -> alunoService.buscarPorId("xyz"));
+            PokemonNaoEncontradoException ex = assertThrows(
+                PokemonNaoEncontradoException.class,
+                () -> alunoService.buscarPorId("xyz")
+            );
             assertEquals("Aluno com id xyz não encontrado.", ex.getMessage());
         }
     }
@@ -125,12 +147,19 @@ class AlunoServiceTest {
     class Inserir {
 
         @Test
-        @DisplayName("salva um aluno válido e devolve o que o repositório retornou")
+        @DisplayName(
+            "salva um aluno válido e devolve o que o repositório retornou"
+        )
         void inserirValido() {
-            Aluno salvo = new Aluno("novo-id", "Maria", "maria@sga.pucminas.br", "Engenharia de Software");
-            when(alunoRepository.save(any(Aluno.class))).thenReturn(salvo);
+            Pokemon salvo = new Pokemon(
+                "novo-id",
+                "Maria",
+                "maria@sga.pucminas.br",
+                "Engenharia de Software"
+            );
+            when(alunoRepository.save(any(Pokemon.class))).thenReturn(salvo);
 
-            Aluno resultado = alunoService.inserir(alunoValido);
+            Pokemon resultado = alunoService.inserir(alunoValido);
 
             assertSame(salvo, resultado);
             verify(alunoRepository).save(alunoValido);
@@ -140,9 +169,11 @@ class AlunoServiceTest {
         @DisplayName("ignora o id enviado: quem gera o id é o MongoDB")
         void zeraId() {
             alunoValido.setId("id-do-cliente");
-            when(alunoRepository.save(any(Aluno.class))).thenAnswer(inv -> inv.getArgument(0));
+            when(alunoRepository.save(any(Pokemon.class))).thenAnswer(inv ->
+                inv.getArgument(0)
+            );
 
-            Aluno resultado = alunoService.inserir(alunoValido);
+            Pokemon resultado = alunoService.inserir(alunoValido);
 
             assertNull(resultado.getId());
         }
@@ -150,14 +181,23 @@ class AlunoServiceTest {
         @Test
         @DisplayName("remove espaços dos textos e deixa o e-mail em minúsculas")
         void limpaCampos() {
-            Aluno sujo = new Aluno(null, "  Maria Silva  ", "  Maria@SGA.PucMinas.br  ", "  Engenharia de Software  ");
-            when(alunoRepository.save(any(Aluno.class))).thenAnswer(inv -> inv.getArgument(0));
+            Pokemon sujo = new Pokemon(
+                null,
+                "  Maria Silva  ",
+                "  Maria@SGA.PucMinas.br  ",
+                "  Engenharia de Software  "
+            );
+            when(alunoRepository.save(any(Pokemon.class))).thenAnswer(inv ->
+                inv.getArgument(0)
+            );
 
             alunoService.inserir(sujo);
 
-            ArgumentCaptor<Aluno> captor = ArgumentCaptor.forClass(Aluno.class);
+            ArgumentCaptor<Pokemon> captor = ArgumentCaptor.forClass(
+                Pokemon.class
+            );
             verify(alunoRepository).save(captor.capture());
-            Aluno gravado = captor.getValue();
+            Pokemon gravado = captor.getValue();
 
             assertEquals("Maria Silva", gravado.getNome());
             assertEquals("maria@sga.pucminas.br", gravado.getEmail());
@@ -168,7 +208,9 @@ class AlunoServiceTest {
         @DisplayName("curso nulo vira texto vazio")
         void cursoNulo() {
             alunoValido.setCurso(null);
-            when(alunoRepository.save(any(Aluno.class))).thenAnswer(inv -> inv.getArgument(0));
+            when(alunoRepository.save(any(Pokemon.class))).thenAnswer(inv ->
+                inv.getArgument(0)
+            );
 
             assertEquals("", alunoService.inserir(alunoValido).getCurso());
         }
@@ -177,18 +219,32 @@ class AlunoServiceTest {
         @DisplayName("curso só com espaços vira texto vazio (curso é opcional)")
         void cursoEmBranco() {
             alunoValido.setCurso("   ");
-            when(alunoRepository.save(any(Aluno.class))).thenAnswer(inv -> inv.getArgument(0));
+            when(alunoRepository.save(any(Pokemon.class))).thenAnswer(inv ->
+                inv.getArgument(0)
+            );
 
             assertEquals("", alunoService.inserir(alunoValido).getCurso());
         }
 
         @ParameterizedTest(name = "e-mail \"{0}\" é aceito")
-        @ValueSource(strings = {"maria@sga.pucminas.br", "a@b.c", "joao.silva+aula@gmail.com", "  ana@puc.br  "})
+        @ValueSource(
+            strings = {
+                "maria@sga.pucminas.br",
+                "a@b.c",
+                "joao.silva+aula@gmail.com",
+                "  ana@puc.br  ",
+            }
+        )
         void emailsValidos(String email) {
             alunoValido.setEmail(email);
-            when(alunoRepository.save(any(Aluno.class))).thenAnswer(inv -> inv.getArgument(0));
+            when(alunoRepository.save(any(Pokemon.class))).thenAnswer(inv ->
+                inv.getArgument(0)
+            );
 
-            assertEquals(email.trim().toLowerCase(), alunoService.inserir(alunoValido).getEmail());
+            assertEquals(
+                email.trim().toLowerCase(),
+                alunoService.inserir(alunoValido).getEmail()
+            );
         }
     }
 
@@ -197,9 +253,11 @@ class AlunoServiceTest {
     @DisplayName("validação (400 - DadosInvalidosException)")
     class Validacao {
 
-        private void assertInvalido(Aluno aluno, String mensagemEsperada) {
-            DadosInvalidosException ex = assertThrows(DadosInvalidosException.class,
-                    () -> alunoService.inserir(aluno));
+        private void assertInvalido(Pokemon aluno, String mensagemEsperada) {
+            DadosInvalidosException ex = assertThrows(
+                DadosInvalidosException.class,
+                () -> alunoService.inserir(aluno)
+            );
             assertEquals(mensagemEsperada, ex.getMessage());
             verify(alunoRepository, never()).save(any());
         }
@@ -207,12 +265,15 @@ class AlunoServiceTest {
         @Test
         @DisplayName("aluno nulo")
         void alunoNulo() {
-            assertInvalido(null, "Envie os dados do aluno no corpo da requisição.");
+            assertInvalido(
+                null,
+                "Envie os dados do aluno no corpo da requisição."
+            );
         }
 
         @ParameterizedTest(name = "nome = \"{0}\"")
         @NullAndEmptySource
-        @ValueSource(strings = {"   ", "\t"})
+        @ValueSource(strings = { "   ", "\t" })
         void nomeObrigatorio(String nome) {
             alunoValido.setNome(nome);
             assertInvalido(alunoValido, "O nome do aluno é obrigatório.");
@@ -220,24 +281,36 @@ class AlunoServiceTest {
 
         @ParameterizedTest(name = "e-mail = \"{0}\"")
         @NullAndEmptySource
-        @ValueSource(strings = {"   ", "\t"})
+        @ValueSource(strings = { "   ", "\t" })
         void emailObrigatorio(String email) {
             alunoValido.setEmail(email);
             assertInvalido(alunoValido, "O e-mail do aluno é obrigatório.");
         }
 
         @ParameterizedTest(name = "e-mail inválido = \"{0}\"")
-        @ValueSource(strings = {"maria", "maria@", "@sga.pucminas.br", "maria@pucminas",
-                "maria@@puc.br", "maria silva@puc.br", "maria@puc .br"})
+        @ValueSource(
+            strings = {
+                "maria",
+                "maria@",
+                "@sga.pucminas.br",
+                "maria@pucminas",
+                "maria@@puc.br",
+                "maria silva@puc.br",
+                "maria@puc .br",
+            }
+        )
         void emailInvalido(String email) {
             alunoValido.setEmail(email);
-            assertInvalido(alunoValido, "Informe um e-mail válido (ex.: maria@sga.pucminas.br).");
+            assertInvalido(
+                alunoValido,
+                "Informe um e-mail válido (ex.: maria@sga.pucminas.br)."
+            );
         }
 
         @Test
         @DisplayName("o nome é validado antes do e-mail")
         void ordemDaValidacao() {
-            Aluno vazio = new Aluno(null, "", "", "");
+            Pokemon vazio = new Pokemon(null, "", "", "");
             assertInvalido(vazio, "O nome do aluno é obrigatório.");
         }
     }
@@ -248,14 +321,30 @@ class AlunoServiceTest {
     class Atualizar {
 
         @Test
-        @DisplayName("copia os dados para o aluno existente, mantém o id e salva")
+        @DisplayName(
+            "copia os dados para o aluno existente, mantém o id e salva"
+        )
         void atualizaExistente() {
-            Aluno existente = new Aluno("abc", "Antigo", "antigo@puc.br", "Antigo curso");
-            Aluno dados = new Aluno("outro-id", "  Maria  ", "  MARIA@PUC.BR ", " Ciência da Computação ");
-            when(alunoRepository.findById("abc")).thenReturn(Optional.of(existente));
-            when(alunoRepository.save(any(Aluno.class))).thenAnswer(inv -> inv.getArgument(0));
+            Pokemon existente = new Pokemon(
+                "abc",
+                "Antigo",
+                "antigo@puc.br",
+                "Antigo curso"
+            );
+            Pokemon dados = new Pokemon(
+                "outro-id",
+                "  Maria  ",
+                "  MARIA@PUC.BR ",
+                " Ciência da Computação "
+            );
+            when(alunoRepository.findById("abc")).thenReturn(
+                Optional.of(existente)
+            );
+            when(alunoRepository.save(any(Pokemon.class))).thenAnswer(inv ->
+                inv.getArgument(0)
+            );
 
-            Aluno resultado = alunoService.atualizar("abc", dados);
+            Pokemon resultado = alunoService.atualizar("abc", dados);
 
             assertSame(existente, resultado);
             assertEquals("abc", resultado.getId());
@@ -268,12 +357,24 @@ class AlunoServiceTest {
         @Test
         @DisplayName("curso nulo nos dados vira texto vazio")
         void cursoNulo() {
-            Aluno existente = new Aluno("abc", "Antigo", "antigo@puc.br", "Antigo curso");
-            when(alunoRepository.findById("abc")).thenReturn(Optional.of(existente));
-            when(alunoRepository.save(any(Aluno.class))).thenAnswer(inv -> inv.getArgument(0));
+            Pokemon existente = new Pokemon(
+                "abc",
+                "Antigo",
+                "antigo@puc.br",
+                "Antigo curso"
+            );
+            when(alunoRepository.findById("abc")).thenReturn(
+                Optional.of(existente)
+            );
+            when(alunoRepository.save(any(Pokemon.class))).thenAnswer(inv ->
+                inv.getArgument(0)
+            );
             alunoValido.setCurso(null);
 
-            assertEquals("", alunoService.atualizar("abc", alunoValido).getCurso());
+            assertEquals(
+                "",
+                alunoService.atualizar("abc", alunoValido).getCurso()
+            );
         }
 
         @Test
@@ -281,19 +382,31 @@ class AlunoServiceTest {
         void naoEncontrado() {
             when(alunoRepository.findById("xyz")).thenReturn(Optional.empty());
 
-            assertThrows(AlunoNaoEncontradoException.class,
-                    () -> alunoService.atualizar("xyz", alunoValido));
+            assertThrows(PokemonNaoEncontradoException.class, () ->
+                alunoService.atualizar("xyz", alunoValido)
+            );
             verify(alunoRepository, never()).save(any());
         }
 
         @Test
-        @DisplayName("lança 400 quando os dados são inválidos e não altera o existente")
+        @DisplayName(
+            "lança 400 quando os dados são inválidos e não altera o existente"
+        )
         void dadosInvalidos() {
-            Aluno existente = new Aluno("abc", "Antigo", "antigo@puc.br", "Antigo curso");
-            when(alunoRepository.findById("abc")).thenReturn(Optional.of(existente));
+            Pokemon existente = new Pokemon(
+                "abc",
+                "Antigo",
+                "antigo@puc.br",
+                "Antigo curso"
+            );
+            when(alunoRepository.findById("abc")).thenReturn(
+                Optional.of(existente)
+            );
             alunoValido.setEmail("email-invalido");
 
-            assertThrows(DadosInvalidosException.class, () -> alunoService.atualizar("abc", alunoValido));
+            assertThrows(DadosInvalidosException.class, () ->
+                alunoService.atualizar("abc", alunoValido)
+            );
 
             assertEquals("Antigo", existente.getNome());
             assertEquals("antigo@puc.br", existente.getEmail());
@@ -303,9 +416,13 @@ class AlunoServiceTest {
         @Test
         @DisplayName("lança 400 quando o corpo é nulo")
         void corpoNulo() {
-            when(alunoRepository.findById("abc")).thenReturn(Optional.of(aluno("abc", "X")));
+            when(alunoRepository.findById("abc")).thenReturn(
+                Optional.of(aluno("abc", "X"))
+            );
 
-            assertThrows(DadosInvalidosException.class, () -> alunoService.atualizar("abc", null));
+            assertThrows(DadosInvalidosException.class, () ->
+                alunoService.atualizar("abc", null)
+            );
             verify(alunoRepository, never()).save(any());
         }
     }
@@ -330,8 +447,10 @@ class AlunoServiceTest {
         void naoEncontrado() {
             when(alunoRepository.existsById("xyz")).thenReturn(false);
 
-            AlunoNaoEncontradoException ex = assertThrows(AlunoNaoEncontradoException.class,
-                    () -> alunoService.excluir("xyz"));
+            PokemonNaoEncontradoException ex = assertThrows(
+                PokemonNaoEncontradoException.class,
+                () -> alunoService.excluir("xyz")
+            );
             assertTrue(ex.getMessage().contains("xyz"));
             verify(alunoRepository, never()).deleteById(anyString());
         }

@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
  * {
  *   "status": 404,
  *   "erro": "Not Found",
- *   "mensagem": "Aluno com id 123 não encontrado.",
- *   "caminho": "/api/alunos/123",
+ *   "mensagem": "pokemon com id 123 não encontrado.",
+ *   "caminho": "/api/pokemons/123",
  *   "timestamp": "2026-10-15T10:30:00"
  * }
  *
@@ -23,7 +23,12 @@ public class ErroResposta {
     private final String caminho;
     private final String timestamp;
 
-    public ErroResposta(int status, String erro, String mensagem, String caminho) {
+    public ErroResposta(
+        int status,
+        String erro,
+        String mensagem,
+        String caminho
+    ) {
         this.status = status;
         this.erro = erro;
         this.mensagem = mensagem;

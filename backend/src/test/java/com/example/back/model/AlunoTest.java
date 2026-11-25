@@ -11,7 +11,7 @@ class AlunoTest {
     @Test
     @DisplayName("construtor vazio: todos os campos começam nulos")
     void construtorVazio() {
-        Aluno a = new Aluno();
+        Pokemon a = new Pokemon();
 
         assertNull(a.getId());
         assertNull(a.getNome());
@@ -22,7 +22,7 @@ class AlunoTest {
     @Test
     @DisplayName("construtor completo preenche todos os campos")
     void construtorCompleto() {
-        Aluno a = new Aluno("1", "Maria", "maria@sga.pucminas.br", "Engenharia de Software");
+        Pokemon a = new Pokemon("1", "Maria", "maria@sga.pucminas.br", "Engenharia de Software");
 
         assertEquals("1", a.getId());
         assertEquals("Maria", a.getNome());
@@ -33,7 +33,7 @@ class AlunoTest {
     @Test
     @DisplayName("setters alteram os campos")
     void setters() {
-        Aluno a = new Aluno();
+        Pokemon a = new Pokemon();
         a.setId("2");
         a.setNome("João");
         a.setEmail("joao@sga.pucminas.br");
