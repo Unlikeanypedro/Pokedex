@@ -24,16 +24,19 @@ public class CorsConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        String[] origens = corsProperties.getAllowedOrigins().stream()
-                .map(String::trim)
-                .filter(origem -> !origem.isEmpty())
-                .toArray(String[]::new);
+        String[] origens = corsProperties
+            .getAllowedOrigins()
+            .stream()
+            .map(String::trim)
+            .filter(origem -> !origem.isEmpty())
+            .toArray(String[]::new);
 
-        registry.addMapping("/**")
-                // allowedOriginPatterns aceita endereços exatos e também curingas,
-                // por exemplo https://*.vercel.app
-                .allowedOriginPatterns(origens)
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                .allowedHeaders("*");
+        registry
+            .addMapping("/**")
+            // allowedOriginPatterns aceita endereços exatos e também curingas,
+            // por exemplo https://*.vercel.app
+            .allowedOriginPatterns(origens)
+            .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+            .allowedHeaders("*");
     }
 }

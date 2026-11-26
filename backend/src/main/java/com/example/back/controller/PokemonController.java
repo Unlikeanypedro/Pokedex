@@ -44,18 +44,13 @@ public class PokemonController {
     }
 
     @PostMapping
-    public ResponseEntity<PokemonResponse> inserir(
-        @RequestBody PokemonRequest pokemon
-    ) {
+    public ResponseEntity<PokemonResponse> inserir(@RequestBody PokemonRequest pokemon) {
         PokemonResponse criado = pokemonService.inserir(pokemon);
         return ResponseEntity.status(HttpStatus.CREATED).body(criado);
     }
 
     @PutMapping("/{id}")
-    public PokemonResponse atualizar(
-        @PathVariable String id,
-        @RequestBody PokemonRequest pokemon
-    ) {
+    public PokemonResponse atualizar(@PathVariable String id, @RequestBody PokemonRequest pokemon) {
         return pokemonService.atualizar(id, pokemon);
     }
 

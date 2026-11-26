@@ -9,8 +9,4 @@ import java.util.List;
  * Os tipos chegam como objetos ({ "id": "5", "name": "Electric" }), o mesmo
  * formato que a API devolve — assim o front reenvia exatamente o que recebeu.
  */
-public record PokemonRequest(
-    String name,
-    PokemonStats stats,
-    List<TypeRef> types
-) {}
+public record PokemonRequest(String name, PokemonStats stats, List<TypeRef> types) {}

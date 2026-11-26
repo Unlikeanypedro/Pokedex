@@ -185,17 +185,17 @@ app.cors.allowed-origins=http://localhost:5173,http://localhost:4173
 
 ## Endpoints da API
 
-| Método | Endpoint | Descrição | Respostas |
-| --- | --- | --- | --- |
-| `GET` | `/api/status` | Status da API e do MongoDB | 200 |
-| `GET` | `/api/pokemons` | Lista todos os Pokémon | 200 |
-| `GET` | `/api/pokemons?name=pika` | Busca por nome (contém, sem diferenciar maiúsculas) | 200 |
-| `GET` | `/api/pokemons/{id}` | Busca um Pokémon | 200 / 404 |
-| `POST` | `/api/pokemons` | Cadastra um Pokémon | 201 / 400 |
-| `PUT` | `/api/pokemons/{id}` | Atualiza todos os campos | 200 / 400 / 404 |
-| `DELETE` | `/api/pokemons/{id}` | Remove um Pokémon | 204 / 404 |
-| `GET` | `/api/types` | Lista os tipos (`{id, name}`) | 200 |
-| `GET` | `/api/trainers` | Lista treinadores com insígnias e time | 200 |
+| Método   | Endpoint                  | Descrição                                           | Respostas       |
+| -------- | ------------------------- | --------------------------------------------------- | --------------- |
+| `GET`    | `/api/status`             | Status da API e do MongoDB                          | 200             |
+| `GET`    | `/api/pokemons`           | Lista todos os Pokémon                              | 200             |
+| `GET`    | `/api/pokemons?name=pika` | Busca por nome (contém, sem diferenciar maiúsculas) | 200             |
+| `GET`    | `/api/pokemons/{id}`      | Busca um Pokémon                                    | 200 / 404       |
+| `POST`   | `/api/pokemons`           | Cadastra um Pokémon                                 | 201 / 400       |
+| `PUT`    | `/api/pokemons/{id}`      | Atualiza todos os campos                            | 200 / 400 / 404 |
+| `DELETE` | `/api/pokemons/{id}`      | Remove um Pokémon                                   | 204 / 404       |
+| `GET`    | `/api/types`              | Lista os tipos (`{id, name}`)                       | 200             |
+| `GET`    | `/api/trainers`           | Lista treinadores com insígnias e time              | 200             |
 
 ### Formato do Pokémon
 
@@ -290,14 +290,14 @@ as entradas repetidas nos times de Koga e Lance.
 
 ## Coleções no MongoDB
 
-| Coleção | Conteúdo | Situação |
-| --- | --- | --- |
-| `pokemons` | Pokémon com `name`, `stats` e IDs de `types` | Em uso |
-| `types` | Tipos (`name`, efetividade opcional) | Em uso |
-| `trainers` | Treinadores (`name`, `badges`) | Em uso |
-| `trainer_teams` | Time de cada treinador (`trainerId`, `pokemonIds`) | Em uso |
-| `seed_metadata` | Registro de conclusão da carga inicial | Em uso |
-| `moves`, `pokemon_moves`, `games`, `pokemon_builds`, `animes` | Modelos da expansão | Modelados, sem endpoints |
+| Coleção                                                       | Conteúdo                                           | Situação                 |
+| ------------------------------------------------------------- | -------------------------------------------------- | ------------------------ |
+| `pokemons`                                                    | Pokémon com `name`, `stats` e IDs de `types`       | Em uso                   |
+| `types`                                                       | Tipos (`name`, efetividade opcional)               | Em uso                   |
+| `trainers`                                                    | Treinadores (`name`, `badges`)                     | Em uso                   |
+| `trainer_teams`                                               | Time de cada treinador (`trainerId`, `pokemonIds`) | Em uso                   |
+| `seed_metadata`                                               | Registro de conclusão da carga inicial             | Em uso                   |
+| `moves`, `pokemon_moves`, `games`, `pokemon_builds`, `animes` | Modelos da expansão                                | Modelados, sem endpoints |
 
 ---
 
@@ -321,10 +321,10 @@ as entradas repetidas nos times de Koga e Lance.
 
 ## Problemas comuns
 
-| Sintoma | Causa provável |
-| --- | --- |
-| `503` ou `mongodb: offline` em `/api/status` | Confira a URI, as credenciais e a disponibilidade do banco. No Atlas, confira a lista de IPs permitidos. |
-| Erro de CORS no navegador | Origem do front fora de `app.cors.allowed-origins` |
-| `Port 8080 was already in use` | Já existe outra instância rodando; encerre-a ou use `--server.port=8081` |
-| Lista vazia na API | Confira `MONGODB_DB` e os dados do banco externo. Para popular um banco de teste vazio, use `APP_SEED_ENABLED=true`. |
-| `npm: command not found` ou aviso de versão do Node.js | Instale uma versão do Node.js com npm conforme os pré-requisitos. |
+| Sintoma                                                | Causa provável                                                                                                       |
+| ------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------- |
+| `503` ou `mongodb: offline` em `/api/status`           | Confira a URI, as credenciais e a disponibilidade do banco. No Atlas, confira a lista de IPs permitidos.             |
+| Erro de CORS no navegador                              | Origem do front fora de `app.cors.allowed-origins`                                                                   |
+| `Port 8080 was already in use`                         | Já existe outra instância rodando; encerre-a ou use `--server.port=8081`                                             |
+| Lista vazia na API                                     | Confira `MONGODB_DB` e os dados do banco externo. Para popular um banco de teste vazio, use `APP_SEED_ENABLED=true`. |
+| `npm: command not found` ou aviso de versão do Node.js | Instale uma versão do Node.js com npm conforme os pré-requisitos.                                                    |

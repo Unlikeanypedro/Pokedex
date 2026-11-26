@@ -55,7 +55,8 @@ public class DataSeeder implements CommandLineRunner {
         }
 
         try {
-            MongoCollection<Document> controle = mongoTemplate.getCollection(COLECAO_CONTROLE)
+            MongoCollection<Document> controle = mongoTemplate
+                .getCollection(COLECAO_CONTROLE)
                 .withReadPreference(ReadPreference.primary());
             if (controle.find(Filters.eq("_id", ID_SEED)).first() != null) {
                 log.info("Carga inicial já concluída.");
@@ -90,18 +91,17 @@ public class DataSeeder implements CommandLineRunner {
             );
         } catch (Exception e) {
             // A API continua disponível para consultar o status do banco.
-            log.warn(
-                "Não foi possível popular o MongoDB automaticamente: {}",
-                e.getMessage()
-            );
+            log.warn("Não foi possível popular o MongoDB automaticamente: {}", e.getMessage());
         }
     }
 
     private boolean todosTimesPresentes(List<TrainerTeam> times) {
         List<String> ids = times.stream().map(TrainerTeam::getId).toList();
-        return colecao(TrainerTeam.class)
-            .withReadPreference(ReadPreference.primary())
-            .countDocuments(Filters.in("_id", ids)) == ids.size();
+        return (
+            colecao(TrainerTeam.class)
+                .withReadPreference(ReadPreference.primary())
+                .countDocuments(Filters.in("_id", ids)) == ids.size()
+        );
     }
 
     private void registrarConclusao(MongoCollection<Document> controle) {
@@ -113,7 +113,8 @@ public class DataSeeder implements CommandLineRunner {
     }
 
     private <T> void inserirAusentes(Class<T> classe, List<T> entidades) {
-        List<WriteModel<Document>> operacoes = entidades.stream()
+        List<WriteModel<Document>> operacoes = entidades
+            .stream()
             .map(entidade -> inserirSeAusente(entidade))
             .toList();
 

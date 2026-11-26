@@ -13,7 +13,11 @@ services:
     depends_on:
       - backend
     healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1/api/status | grep -q '\"mongodb\":\"online\"'"]
+      test:
+        [
+          "CMD-SHELL",
+          'wget -qO- http://127.0.0.1/api/status | grep -q ''"mongodb":"online"''',
+        ]
       interval: 5s
       timeout: 5s
       retries: 12

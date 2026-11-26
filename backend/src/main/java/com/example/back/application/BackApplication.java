@@ -11,11 +11,11 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
  * procurar os outros componentes (scanBasePackages) e os repositórios do
  * MongoDB (@EnableMongoRepositories).
  */
-@SpringBootApplication(scanBasePackages = {"com.example.back"})
+@SpringBootApplication(scanBasePackages = { "com.example.back" })
 @EnableMongoRepositories("com.example.back.repository")
 public class BackApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(BackApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(BackApplication.class, args);
+    }
 }

@@ -23,12 +23,7 @@ public class ErroResposta {
     private final String caminho;
     private final String timestamp;
 
-    public ErroResposta(
-        int status,
-        String erro,
-        String mensagem,
-        String caminho
-    ) {
+    public ErroResposta(int status, String erro, String mensagem, String caminho) {
         this.status = status;
         this.erro = erro;
         this.mensagem = mensagem;

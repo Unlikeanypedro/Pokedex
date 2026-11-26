@@ -45,12 +45,7 @@ public class Pokemon {
     public Pokemon() {}
 
     // Construtor completo
-    public Pokemon(
-        String id,
-        String name,
-        PokemonStats stats,
-        List<Integer> types
-    ) {
+    public Pokemon(String id, String name, PokemonStats stats, List<Integer> types) {
         this.id = id;
         this.name = name;
         this.stats = stats;

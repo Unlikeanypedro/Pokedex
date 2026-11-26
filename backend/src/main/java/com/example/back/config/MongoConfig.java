@@ -2,12 +2,11 @@ package com.example.back.config;
 
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
 
 /**
  * Conecta o Spring Boot ao MongoDB Atlas usando os valores de MongoDBProperties
@@ -38,7 +37,8 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
 
         if (uri == null || uri.isBlank()) {
             throw new IllegalStateException(
-                    "Configure app.mongodb.connection-string no application.properties.");
+                "Configure app.mongodb.connection-string no application.properties."
+            );
         }
 
         ConnectionString connectionString;
@@ -47,14 +47,17 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
             connectionString = new ConnectionString(uri);
         } catch (RuntimeException e) {
             throw new IllegalStateException(
-                    "Connection string do MongoDB inválida. Confira app.mongodb.connection-string "
-                            + "no application.properties (usuário, senha e endereço do cluster).", e);
+                "Connection string do MongoDB inválida. Confira app.mongodb.connection-string " +
+                    "no application.properties (usuário, senha e endereço do cluster).",
+                e
+            );
         }
 
-        builder.applyConnectionString(connectionString)
-                // Se o Atlas não responder em 5 segundos, desiste e devolve erro
-                // (o padrão do driver é 30 segundos, longo demais para uma aula)
-                .applyToClusterSettings(cluster -> cluster.serverSelectionTimeout(5, TimeUnit.SECONDS));
+        builder
+            .applyConnectionString(connectionString)
+            // Se o Atlas não responder em 5 segundos, desiste e devolve erro
+            // (o padrão do driver é 30 segundos, longo demais para uma aula)
+            .applyToClusterSettings(cluster -> cluster.serverSelectionTimeout(5, TimeUnit.SECONDS));
     }
 
     /** Pacote onde ficam as classes @Document (model). */

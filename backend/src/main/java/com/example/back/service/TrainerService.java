@@ -36,12 +36,14 @@ public class TrainerService {
         return trainerRepository
             .findAll(Sort.by("name"))
             .stream()
-            .map(trainer -> new TrainerResponse(
-                trainer.getId(),
-                trainer.getName(),
-                trainer.getBadges(),
-                times.getOrDefault(trainer.getId(), List.of())
-            ))
+            .map(trainer ->
+                new TrainerResponse(
+                    trainer.getId(),
+                    trainer.getName(),
+                    trainer.getBadges(),
+                    times.getOrDefault(trainer.getId(), List.of())
+                )
+            )
             .toList();
     }
 }

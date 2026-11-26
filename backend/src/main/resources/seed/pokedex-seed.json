@@ -85,10 +85,7 @@
         "specialDefense": 65,
         "speed": 45
       },
-      "types": [
-        4,
-        8
-      ]
+      "types": [4, 8]
     },
     {
       "id": "2",
@@ -101,10 +98,7 @@
         "specialDefense": 80,
         "speed": 60
       },
-      "types": [
-        4,
-        8
-      ]
+      "types": [4, 8]
     },
     {
       "id": "3",
@@ -117,10 +111,7 @@
         "specialDefense": 100,
         "speed": 80
       },
-      "types": [
-        4,
-        8
-      ]
+      "types": [4, 8]
     },
     {
       "id": "4",
@@ -133,9 +124,7 @@
         "specialDefense": 50,
         "speed": 65
       },
-      "types": [
-        2
-      ]
+      "types": [2]
     },
     {
       "id": "5",
@@ -148,9 +137,7 @@
         "specialDefense": 65,
         "speed": 80
       },
-      "types": [
-        2
-      ]
+      "types": [2]
     },
     {
       "id": "6",
@@ -163,10 +150,7 @@
         "specialDefense": 85,
         "speed": 100
       },
-      "types": [
-        2,
-        10
-      ]
+      "types": [2, 10]
     },
     {
       "id": "7",
@@ -179,9 +163,7 @@
         "specialDefense": 54,
         "speed": 43
       },
-      "types": [
-        3
-      ]
+      "types": [3]
     },
     {
       "id": "8",
@@ -194,9 +176,7 @@
         "specialDefense": 80,
         "speed": 58
       },
-      "types": [
-        3
-      ]
+      "types": [3]
     },
     {
       "id": "9",
@@ -209,9 +189,7 @@
         "specialDefense": 105,
         "speed": 78
       },
-      "types": [
-        3
-      ]
+      "types": [3]
     },
     {
       "id": "10",
@@ -224,9 +202,7 @@
         "specialDefense": 20,
         "speed": 45
       },
-      "types": [
-        12
-      ]
+      "types": [12]
     },
     {
       "id": "11",
@@ -239,9 +215,7 @@
         "specialDefense": 25,
         "speed": 30
       },
-      "types": [
-        12
-      ]
+      "types": [12]
     },
     {
       "id": "12",
@@ -254,10 +228,7 @@
         "specialDefense": 80,
         "speed": 70
       },
-      "types": [
-        12,
-        10
-      ]
+      "types": [12, 10]
     },
     {
       "id": "13",
@@ -270,10 +241,7 @@
         "specialDefense": 20,
         "speed": 50
       },
-      "types": [
-        12,
-        8
-      ]
+      "types": [12, 8]
     },
     {
       "id": "14",
@@ -286,10 +254,7 @@
         "specialDefense": 25,
         "speed": 35
       },
-      "types": [
-        12,
-        8
-      ]
+      "types": [12, 8]
     },
     {
       "id": "15",
@@ -302,10 +267,7 @@
         "specialDefense": 80,
         "speed": 75
       },
-      "types": [
-        12,
-        8
-      ]
+      "types": [12, 8]
     },
     {
       "id": "16",
@@ -318,10 +280,7 @@
         "specialDefense": 35,
         "speed": 56
       },
-      "types": [
-        1,
-        10
-      ]
+      "types": [1, 10]
     },
     {
       "id": "17",
@@ -334,10 +293,7 @@
         "specialDefense": 50,
         "speed": 71
       },
-      "types": [
-        1,
-        10
-      ]
+      "types": [1, 10]
     },
     {
       "id": "18",
@@ -350,10 +306,7 @@
         "specialDefense": 70,
         "speed": 91
       },
-      "types": [
-        1,
-        10
-      ]
+      "types": [1, 10]
     },
     {
       "id": "19",
@@ -366,9 +319,7 @@
         "specialDefense": 35,
         "speed": 72
       },
-      "types": [
-        1
-      ]
+      "types": [1]
     },
     {
       "id": "20",
@@ -381,9 +332,7 @@
         "specialDefense": 70,
         "speed": 97
       },
-      "types": [
-        1
-      ]
+      "types": [1]
     },
     {
       "id": "21",
@@ -396,10 +345,7 @@
         "specialDefense": 31,
         "speed": 70
       },
-      "types": [
-        1,
-        10
-      ]
+      "types": [1, 10]
     },
     {
       "id": "22",
@@ -412,10 +358,7 @@
         "specialDefense": 61,
         "speed": 100
       },
-      "types": [
-        1,
-        10
-      ]
+      "types": [1, 10]
     },
     {
       "id": "23",
@@ -428,9 +371,7 @@
         "specialDefense": 54,
         "speed": 55
       },
-      "types": [
-        8
-      ]
+      "types": [8]
     },
     {
       "id": "24",
@@ -443,9 +384,7 @@
         "specialDefense": 79,
         "speed": 80
       },
-      "types": [
-        8
-      ]
+      "types": [8]
     },
     {
       "id": "25",
@@ -458,9 +397,7 @@
         "specialDefense": 40,
         "speed": 90
       },
-      "types": [
-        5
-      ]
+      "types": [5]
     },
     {
       "id": "26",
@@ -473,9 +410,7 @@
         "specialDefense": 80,
         "speed": 100
       },
-      "types": [
-        5
-      ]
+      "types": [5]
     },
     {
       "id": "27",
@@ -488,9 +423,7 @@
         "specialDefense": 30,
         "speed": 40
       },
-      "types": [
-        9
-      ]
+      "types": [9]
     },
     {
       "id": "28",
@@ -503,9 +436,7 @@
         "specialDefense": 55,
         "speed": 65
       },
-      "types": [
-        9
-      ]
+      "types": [9]
     },
     {
       "id": "29",
@@ -518,9 +449,7 @@
         "specialDefense": 40,
         "speed": 41
       },
-      "types": [
-        8
-      ]
+      "types": [8]
     },
     {
       "id": "30",
@@ -533,9 +462,7 @@
         "specialDefense": 55,
         "speed": 56
       },
-      "types": [
-        8
-      ]
+      "types": [8]
     },
     {
       "id": "31",
@@ -548,10 +475,7 @@
         "specialDefense": 85,
         "speed": 76
       },
-      "types": [
-        8,
-        9
-      ]
+      "types": [8, 9]
     },
     {
       "id": "32",
@@ -564,9 +488,7 @@
         "specialDefense": 40,
         "speed": 41
       },
-      "types": [
-        8
-      ]
+      "types": [8]
     },
     {
       "id": "33",
@@ -579,9 +501,7 @@
         "specialDefense": 55,
         "speed": 65
       },
-      "types": [
-        8
-      ]
+      "types": [8]
     },
     {
       "id": "34",
@@ -594,10 +514,7 @@
         "specialDefense": 75,
         "speed": 85
       },
-      "types": [
-        8,
-        9
-      ]
+      "types": [8, 9]
     },
     {
       "id": "35",
@@ -610,9 +527,7 @@
         "specialDefense": 65,
         "speed": 35
       },
-      "types": [
-        1
-      ]
+      "types": [1]
     },
     {
       "id": "36",
@@ -625,9 +540,7 @@
         "specialDefense": 90,
         "speed": 60
       },
-      "types": [
-        1
-      ]
+      "types": [1]
     },
     {
       "id": "37",
@@ -640,9 +553,7 @@
         "specialDefense": 65,
         "speed": 65
       },
-      "types": [
-        2
-      ]
+      "types": [2]
     },
     {
       "id": "38",
@@ -655,9 +566,7 @@
         "specialDefense": 100,
         "speed": 100
       },
-      "types": [
-        2
-      ]
+      "types": [2]
     },
     {
       "id": "39",
@@ -670,9 +579,7 @@
         "specialDefense": 25,
         "speed": 20
       },
-      "types": [
-        1
-      ]
+      "types": [1]
     },
     {
       "id": "40",
@@ -685,9 +592,7 @@
         "specialDefense": 50,
         "speed": 45
       },
-      "types": [
-        1
-      ]
+      "types": [1]
     },
     {
       "id": "41",
@@ -700,10 +605,7 @@
         "specialDefense": 40,
         "speed": 55
       },
-      "types": [
-        8,
-        10
-      ]
+      "types": [8, 10]
     },
     {
       "id": "42",
@@ -716,10 +618,7 @@
         "specialDefense": 75,
         "speed": 90
       },
-      "types": [
-        8,
-        10
-      ]
+      "types": [8, 10]
     },
     {
       "id": "43",
@@ -732,10 +631,7 @@
         "specialDefense": 65,
         "speed": 30
       },
-      "types": [
-        4,
-        8
-      ]
+      "types": [4, 8]
     },
     {
       "id": "44",
@@ -748,10 +644,7 @@
         "specialDefense": 75,
         "speed": 40
       },
-      "types": [
-        4,
-        8
-      ]
+      "types": [4, 8]
     },
     {
       "id": "45",
@@ -764,10 +657,7 @@
         "specialDefense": 90,
         "speed": 50
       },
-      "types": [
-        4,
-        8
-      ]
+      "types": [4, 8]
     },
     {
       "id": "46",
@@ -780,10 +670,7 @@
         "specialDefense": 55,
         "speed": 25
       },
-      "types": [
-        12,
-        4
-      ]
+      "types": [12, 4]
     },
     {
       "id": "47",
@@ -796,10 +683,7 @@
         "specialDefense": 80,
         "speed": 30
       },
-      "types": [
-        12,
-        4
-      ]
+      "types": [12, 4]
     },
     {
       "id": "48",
@@ -812,10 +696,7 @@
         "specialDefense": 55,
         "speed": 45
       },
-      "types": [
-        12,
-        8
-      ]
+      "types": [12, 8]
     },
     {
       "id": "49",
@@ -828,10 +709,7 @@
         "specialDefense": 75,
         "speed": 90
       },
-      "types": [
-        12,
-        8
-      ]
+      "types": [12, 8]
     },
     {
       "id": "50",
@@ -844,9 +722,7 @@
         "specialDefense": 45,
         "speed": 95
       },
-      "types": [
-        9
-      ]
+      "types": [9]
     },
     {
       "id": "51",
@@ -859,9 +735,7 @@
         "specialDefense": 70,
         "speed": 120
       },
-      "types": [
-        9
-      ]
+      "types": [9]
     },
     {
       "id": "52",
@@ -874,9 +748,7 @@
         "specialDefense": 40,
         "speed": 90
       },
-      "types": [
-        1
-      ]
+      "types": [1]
     },
     {
       "id": "53",
@@ -889,9 +761,7 @@
         "specialDefense": 65,
         "speed": 115
       },
-      "types": [
-        1
-      ]
+      "types": [1]
     },
     {
       "id": "54",
@@ -904,9 +774,7 @@
         "specialDefense": 50,
         "speed": 55
       },
-      "types": [
-        3
-      ]
+      "types": [3]
     },
     {
       "id": "55",
@@ -919,9 +787,7 @@
         "specialDefense": 80,
         "speed": 85
       },
-      "types": [
-        3
-      ]
+      "types": [3]
     },
     {
       "id": "56",
@@ -934,9 +800,7 @@
         "specialDefense": 45,
         "speed": 70
       },
-      "types": [
-        7
-      ]
+      "types": [7]
     },
     {
       "id": "57",
@@ -949,9 +813,7 @@
         "specialDefense": 70,
         "speed": 95
       },
-      "types": [
-        7
-      ]
+      "types": [7]
     },
     {
       "id": "58",
@@ -964,9 +826,7 @@
         "specialDefense": 50,
         "speed": 60
       },
-      "types": [
-        2
-      ]
+      "types": [2]
     },
     {
       "id": "59",
@@ -979,9 +839,7 @@
         "specialDefense": 80,
         "speed": 95
       },
-      "types": [
-        2
-      ]
+      "types": [2]
     },
     {
       "id": "60",
@@ -994,9 +852,7 @@
         "specialDefense": 40,
         "speed": 90
       },
-      "types": [
-        3
-      ]
+      "types": [3]
     },
     {
       "id": "61",
@@ -1009,9 +865,7 @@
         "specialDefense": 50,
         "speed": 90
       },
-      "types": [
-        3
-      ]
+      "types": [3]
     },
     {
       "id": "62",
@@ -1024,10 +878,7 @@
         "specialDefense": 90,
         "speed": 70
       },
-      "types": [
-        3,
-        7
-      ]
+      "types": [3, 7]
     },
     {
       "id": "63",
@@ -1040,9 +891,7 @@
         "specialDefense": 55,
         "speed": 90
       },
-      "types": [
-        11
-      ]
+      "types": [11]
     },
     {
       "id": "64",
@@ -1055,9 +904,7 @@
         "specialDefense": 70,
         "speed": 105
       },
-      "types": [
-        11
-      ]
+      "types": [11]
     },
     {
       "id": "65",
@@ -1070,9 +917,7 @@
         "specialDefense": 85,
         "speed": 120
       },
-      "types": [
-        11
-      ]
+      "types": [11]
     },
     {
       "id": "66",
@@ -1085,9 +930,7 @@
         "specialDefense": 35,
         "speed": 35
       },
-      "types": [
-        7
-      ]
+      "types": [7]
     },
     {
       "id": "67",
@@ -1100,9 +943,7 @@
         "specialDefense": 60,
         "speed": 45
       },
-      "types": [
-        7
-      ]
+      "types": [7]
     },
     {
       "id": "68",
@@ -1115,9 +956,7 @@
         "specialDefense": 85,
         "speed": 55
       },
-      "types": [
-        7
-      ]
+      "types": [7]
     },
     {
       "id": "69",
@@ -1130,10 +969,7 @@
         "specialDefense": 30,
         "speed": 40
       },
-      "types": [
-        4,
-        8
-      ]
+      "types": [4, 8]
     },
     {
       "id": "70",
@@ -1146,10 +982,7 @@
         "specialDefense": 45,
         "speed": 55
       },
-      "types": [
-        4,
-        8
-      ]
+      "types": [4, 8]
     },
     {
       "id": "71",
@@ -1162,10 +995,7 @@
         "specialDefense": 60,
         "speed": 70
       },
-      "types": [
-        4,
-        8
-      ]
+      "types": [4, 8]
     },
     {
       "id": "72",
@@ -1178,10 +1008,7 @@
         "specialDefense": 100,
         "speed": 70
       },
-      "types": [
-        3,
-        8
-      ]
+      "types": [3, 8]
     },
     {
       "id": "73",
@@ -1194,10 +1021,7 @@
         "specialDefense": 120,
         "speed": 100
       },
-      "types": [
-        3,
-        8
-      ]
+      "types": [3, 8]
     },
     {
       "id": "74",
@@ -1210,10 +1034,7 @@
         "specialDefense": 30,
         "speed": 20
       },
-      "types": [
-        13,
-        9
-      ]
+      "types": [13, 9]
     },
     {
       "id": "75",
@@ -1226,10 +1047,7 @@
         "specialDefense": 45,
         "speed": 35
       },
-      "types": [
-        13,
-        9
-      ]
+      "types": [13, 9]
     },
     {
       "id": "76",
@@ -1242,10 +1060,7 @@
         "specialDefense": 65,
         "speed": 45
       },
-      "types": [
-        13,
-        9
-      ]
+      "types": [13, 9]
     },
     {
       "id": "77",
@@ -1258,9 +1073,7 @@
         "specialDefense": 65,
         "speed": 90
       },
-      "types": [
-        2
-      ]
+      "types": [2]
     },
     {
       "id": "78",
@@ -1273,9 +1086,7 @@
         "specialDefense": 80,
         "speed": 105
       },
-      "types": [
-        2
-      ]
+      "types": [2]
     },
     {
       "id": "79",
@@ -1288,10 +1099,7 @@
         "specialDefense": 40,
         "speed": 15
       },
-      "types": [
-        3,
-        11
-      ]
+      "types": [3, 11]
     },
     {
       "id": "80",
@@ -1304,10 +1112,7 @@
         "specialDefense": 80,
         "speed": 30
       },
-      "types": [
-        3,
-        11
-      ]
+      "types": [3, 11]
     },
     {
       "id": "81",
@@ -1320,10 +1125,7 @@
         "specialDefense": 55,
         "speed": 45
       },
-      "types": [
-        5,
-        17
-      ]
+      "types": [5, 17]
     },
     {
       "id": "82",
@@ -1336,10 +1138,7 @@
         "specialDefense": 70,
         "speed": 70
       },
-      "types": [
-        5,
-        17
-      ]
+      "types": [5, 17]
     },
     {
       "id": "83",
@@ -1352,10 +1151,7 @@
         "specialDefense": 62,
         "speed": 60
       },
-      "types": [
-        1,
-        10
-      ]
+      "types": [1, 10]
     },
     {
       "id": "84",
@@ -1368,10 +1164,7 @@
         "specialDefense": 35,
         "speed": 75
       },
-      "types": [
-        1,
-        10
-      ]
+      "types": [1, 10]
     },
     {
       "id": "85",
@@ -1384,10 +1177,7 @@
         "specialDefense": 60,
         "speed": 100
       },
-      "types": [
-        1,
-        10
-      ]
+      "types": [1, 10]
     },
     {
       "id": "86",
@@ -1400,9 +1190,7 @@
         "specialDefense": 70,
         "speed": 45
       },
-      "types": [
-        3
-      ]
+      "types": [3]
     },
     {
       "id": "87",
@@ -1415,10 +1203,7 @@
         "specialDefense": 95,
         "speed": 70
       },
-      "types": [
-        3,
-        6
-      ]
+      "types": [3, 6]
     },
     {
       "id": "88",
@@ -1431,9 +1216,7 @@
         "specialDefense": 50,
         "speed": 25
       },
-      "types": [
-        8
-      ]
+      "types": [8]
     },
     {
       "id": "89",
@@ -1446,9 +1229,7 @@
         "specialDefense": 100,
         "speed": 50
       },
-      "types": [
-        8
-      ]
+      "types": [8]
     },
     {
       "id": "90",
@@ -1461,9 +1242,7 @@
         "specialDefense": 25,
         "speed": 40
       },
-      "types": [
-        3
-      ]
+      "types": [3]
     },
     {
       "id": "91",
@@ -1476,10 +1255,7 @@
         "specialDefense": 45,
         "speed": 70
       },
-      "types": [
-        3,
-        6
-      ]
+      "types": [3, 6]
     },
     {
       "id": "92",
@@ -1492,10 +1268,7 @@
         "specialDefense": 35,
         "speed": 80
       },
-      "types": [
-        14,
-        8
-      ]
+      "types": [14, 8]
     },
     {
       "id": "93",
@@ -1508,10 +1281,7 @@
         "specialDefense": 55,
         "speed": 95
       },
-      "types": [
-        14,
-        8
-      ]
+      "types": [14, 8]
     },
     {
       "id": "94",
@@ -1524,10 +1294,7 @@
         "specialDefense": 75,
         "speed": 110
       },
-      "types": [
-        14,
-        8
-      ]
+      "types": [14, 8]
     },
     {
       "id": "95",
@@ -1540,10 +1307,7 @@
         "specialDefense": 45,
         "speed": 70
       },
-      "types": [
-        13,
-        9
-      ]
+      "types": [13, 9]
     },
     {
       "id": "96",
@@ -1556,9 +1320,7 @@
         "specialDefense": 90,
         "speed": 42
       },
-      "types": [
-        11
-      ]
+      "types": [11]
     },
     {
       "id": "97",
@@ -1571,9 +1333,7 @@
         "specialDefense": 115,
         "speed": 67
       },
-      "types": [
-        11
-      ]
+      "types": [11]
     },
     {
       "id": "98",
@@ -1586,9 +1346,7 @@
         "specialDefense": 25,
         "speed": 50
       },
-      "types": [
-        3
-      ]
+      "types": [3]
     },
     {
       "id": "99",
@@ -1601,9 +1359,7 @@
         "specialDefense": 50,
         "speed": 75
       },
-      "types": [
-        3
-      ]
+      "types": [3]
     },
     {
       "id": "100",
@@ -1616,9 +1372,7 @@
         "specialDefense": 55,
         "speed": 100
       },
-      "types": [
-        5
-      ]
+      "types": [5]
     },
     {
       "id": "101",
@@ -1631,9 +1385,7 @@
         "specialDefense": 80,
         "speed": 140
       },
-      "types": [
-        5
-      ]
+      "types": [5]
     },
     {
       "id": "102",
@@ -1646,10 +1398,7 @@
         "specialDefense": 45,
         "speed": 40
       },
-      "types": [
-        4,
-        11
-      ]
+      "types": [4, 11]
     },
     {
       "id": "103",
@@ -1662,10 +1411,7 @@
         "specialDefense": 65,
         "speed": 55
       },
-      "types": [
-        4,
-        11
-      ]
+      "types": [4, 11]
     },
     {
       "id": "104",
@@ -1678,9 +1424,7 @@
         "specialDefense": 50,
         "speed": 35
       },
-      "types": [
-        9
-      ]
+      "types": [9]
     },
     {
       "id": "105",
@@ -1693,9 +1437,7 @@
         "specialDefense": 80,
         "speed": 45
       },
-      "types": [
-        9
-      ]
+      "types": [9]
     },
     {
       "id": "106",
@@ -1708,9 +1450,7 @@
         "specialDefense": 110,
         "speed": 87
       },
-      "types": [
-        7
-      ]
+      "types": [7]
     },
     {
       "id": "107",
@@ -1723,9 +1463,7 @@
         "specialDefense": 110,
         "speed": 76
       },
-      "types": [
-        7
-      ]
+      "types": [7]
     },
     {
       "id": "108",
@@ -1738,9 +1476,7 @@
         "specialDefense": 75,
         "speed": 30
       },
-      "types": [
-        1
-      ]
+      "types": [1]
     },
     {
       "id": "109",
@@ -1753,9 +1489,7 @@
         "specialDefense": 45,
         "speed": 35
       },
-      "types": [
-        8
-      ]
+      "types": [8]
     },
     {
       "id": "110",
@@ -1768,9 +1502,7 @@
         "specialDefense": 70,
         "speed": 60
       },
-      "types": [
-        8
-      ]
+      "types": [8]
     },
     {
       "id": "111",
@@ -1783,10 +1515,7 @@
         "specialDefense": 30,
         "speed": 25
       },
-      "types": [
-        9,
-        13
-      ]
+      "types": [9, 13]
     },
     {
       "id": "112",
@@ -1799,10 +1528,7 @@
         "specialDefense": 45,
         "speed": 40
       },
-      "types": [
-        9,
-        13
-      ]
+      "types": [9, 13]
     },
     {
       "id": "113",
@@ -1815,9 +1541,7 @@
         "specialDefense": 105,
         "speed": 50
       },
-      "types": [
-        1
-      ]
+      "types": [1]
     },
     {
       "id": "114",
@@ -1830,9 +1554,7 @@
         "specialDefense": 40,
         "speed": 60
       },
-      "types": [
-        4
-      ]
+      "types": [4]
     },
     {
       "id": "115",
@@ -1845,9 +1567,7 @@
         "specialDefense": 80,
         "speed": 90
       },
-      "types": [
-        1
-      ]
+      "types": [1]
     },
     {
       "id": "116",
@@ -1860,9 +1580,7 @@
         "specialDefense": 25,
         "speed": 60
       },
-      "types": [
-        3
-      ]
+      "types": [3]
     },
     {
       "id": "117",
@@ -1875,9 +1593,7 @@
         "specialDefense": 45,
         "speed": 85
       },
-      "types": [
-        3
-      ]
+      "types": [3]
     },
     {
       "id": "118",
@@ -1890,9 +1606,7 @@
         "specialDefense": 50,
         "speed": 63
       },
-      "types": [
-        3
-      ]
+      "types": [3]
     },
     {
       "id": "119",
@@ -1905,9 +1619,7 @@
         "specialDefense": 80,
         "speed": 68
       },
-      "types": [
-        3
-      ]
+      "types": [3]
     },
     {
       "id": "120",
@@ -1920,9 +1632,7 @@
         "specialDefense": 55,
         "speed": 85
       },
-      "types": [
-        3
-      ]
+      "types": [3]
     },
     {
       "id": "121",
@@ -1935,10 +1645,7 @@
         "specialDefense": 85,
         "speed": 115
       },
-      "types": [
-        3,
-        11
-      ]
+      "types": [3, 11]
     },
     {
       "id": "122",
@@ -1951,9 +1658,7 @@
         "specialDefense": 120,
         "speed": 90
       },
-      "types": [
-        11
-      ]
+      "types": [11]
     },
     {
       "id": "123",
@@ -1966,10 +1671,7 @@
         "specialDefense": 80,
         "speed": 105
       },
-      "types": [
-        12,
-        10
-      ]
+      "types": [12, 10]
     },
     {
       "id": "124",
@@ -1982,10 +1684,7 @@
         "specialDefense": 95,
         "speed": 95
       },
-      "types": [
-        6,
-        11
-      ]
+      "types": [6, 11]
     },
     {
       "id": "125",
@@ -1998,9 +1697,7 @@
         "specialDefense": 85,
         "speed": 105
       },
-      "types": [
-        5
-      ]
+      "types": [5]
     },
     {
       "id": "126",
@@ -2013,9 +1710,7 @@
         "specialDefense": 85,
         "speed": 93
       },
-      "types": [
-        2
-      ]
+      "types": [2]
     },
     {
       "id": "127",
@@ -2028,9 +1723,7 @@
         "specialDefense": 70,
         "speed": 85
       },
-      "types": [
-        12
-      ]
+      "types": [12]
     },
     {
       "id": "128",
@@ -2043,9 +1736,7 @@
         "specialDefense": 70,
         "speed": 110
       },
-      "types": [
-        1
-      ]
+      "types": [1]
     },
     {
       "id": "129",
@@ -2058,9 +1749,7 @@
         "specialDefense": 20,
         "speed": 80
       },
-      "types": [
-        3
-      ]
+      "types": [3]
     },
     {
       "id": "130",
@@ -2073,10 +1762,7 @@
         "specialDefense": 100,
         "speed": 81
       },
-      "types": [
-        3,
-        10
-      ]
+      "types": [3, 10]
     },
     {
       "id": "131",
@@ -2089,10 +1775,7 @@
         "specialDefense": 95,
         "speed": 60
       },
-      "types": [
-        3,
-        6
-      ]
+      "types": [3, 6]
     },
     {
       "id": "132",
@@ -2105,9 +1788,7 @@
         "specialDefense": 48,
         "speed": 48
       },
-      "types": [
-        1
-      ]
+      "types": [1]
     },
     {
       "id": "133",
@@ -2120,9 +1801,7 @@
         "specialDefense": 65,
         "speed": 55
       },
-      "types": [
-        1
-      ]
+      "types": [1]
     },
     {
       "id": "134",
@@ -2135,9 +1814,7 @@
         "specialDefense": 95,
         "speed": 65
       },
-      "types": [
-        3
-      ]
+      "types": [3]
     },
     {
       "id": "135",
@@ -2150,9 +1827,7 @@
         "specialDefense": 95,
         "speed": 130
       },
-      "types": [
-        5
-      ]
+      "types": [5]
     },
     {
       "id": "136",
@@ -2165,9 +1840,7 @@
         "specialDefense": 110,
         "speed": 65
       },
-      "types": [
-        2
-      ]
+      "types": [2]
     },
     {
       "id": "137",
@@ -2180,9 +1853,7 @@
         "specialDefense": 75,
         "speed": 40
       },
-      "types": [
-        1
-      ]
+      "types": [1]
     },
     {
       "id": "138",
@@ -2195,10 +1866,7 @@
         "specialDefense": 55,
         "speed": 35
       },
-      "types": [
-        13,
-        3
-      ]
+      "types": [13, 3]
     },
     {
       "id": "139",
@@ -2211,10 +1879,7 @@
         "specialDefense": 70,
         "speed": 55
       },
-      "types": [
-        13,
-        3
-      ]
+      "types": [13, 3]
     },
     {
       "id": "140",
@@ -2227,10 +1892,7 @@
         "specialDefense": 45,
         "speed": 55
       },
-      "types": [
-        13,
-        3
-      ]
+      "types": [13, 3]
     },
     {
       "id": "141",
@@ -2243,10 +1905,7 @@
         "specialDefense": 70,
         "speed": 80
       },
-      "types": [
-        13,
-        3
-      ]
+      "types": [13, 3]
     },
     {
       "id": "142",
@@ -2259,10 +1918,7 @@
         "specialDefense": 75,
         "speed": 130
       },
-      "types": [
-        13,
-        10
-      ]
+      "types": [13, 10]
     },
     {
       "id": "143",
@@ -2275,9 +1931,7 @@
         "specialDefense": 110,
         "speed": 30
       },
-      "types": [
-        1
-      ]
+      "types": [1]
     },
     {
       "id": "144",
@@ -2290,10 +1944,7 @@
         "specialDefense": 125,
         "speed": 85
       },
-      "types": [
-        6,
-        10
-      ]
+      "types": [6, 10]
     },
     {
       "id": "145",
@@ -2306,10 +1957,7 @@
         "specialDefense": 90,
         "speed": 100
       },
-      "types": [
-        5,
-        10
-      ]
+      "types": [5, 10]
     },
     {
       "id": "146",
@@ -2322,10 +1970,7 @@
         "specialDefense": 85,
         "speed": 90
       },
-      "types": [
-        2,
-        10
-      ]
+      "types": [2, 10]
     },
     {
       "id": "147",
@@ -2338,9 +1983,7 @@
         "specialDefense": 50,
         "speed": 50
       },
-      "types": [
-        16
-      ]
+      "types": [16]
     },
     {
       "id": "148",
@@ -2353,9 +1996,7 @@
         "specialDefense": 70,
         "speed": 70
       },
-      "types": [
-        16
-      ]
+      "types": [16]
     },
     {
       "id": "149",
@@ -2368,10 +2009,7 @@
         "specialDefense": 100,
         "speed": 80
       },
-      "types": [
-        16,
-        10
-      ]
+      "types": [16, 10]
     },
     {
       "id": "150",
@@ -2384,9 +2022,7 @@
         "specialDefense": 90,
         "speed": 130
       },
-      "types": [
-        11
-      ]
+      "types": [11]
     },
     {
       "id": "151",
@@ -2399,9 +2035,7 @@
         "specialDefense": 100,
         "speed": 100
       },
-      "types": [
-        11
-      ]
+      "types": [11]
     }
   ],
   "trainers": [
@@ -2409,125 +2043,73 @@
       "id": "1",
       "name": "Ash",
       "badges": 9,
-      "pokemonIds": [
-        "25",
-        "3",
-        "6",
-        "9",
-        "131",
-        "143"
-      ]
+      "pokemonIds": ["25", "3", "6", "9", "131", "143"]
     },
     {
       "id": "2",
       "name": "Brock",
       "badges": 1,
-      "pokemonIds": [
-        "74",
-        "95"
-      ]
+      "pokemonIds": ["74", "95"]
     },
     {
       "id": "3",
       "name": "Misty",
       "badges": 2,
-      "pokemonIds": [
-        "120",
-        "121"
-      ]
+      "pokemonIds": ["120", "121"]
     },
     {
       "id": "4",
       "name": "Lt. Surge",
       "badges": 3,
-      "pokemonIds": [
-        "26"
-      ]
+      "pokemonIds": ["26"]
     },
     {
       "id": "5",
       "name": "Erika",
       "badges": 4,
-      "pokemonIds": [
-        "114",
-        "70",
-        "44"
-      ]
+      "pokemonIds": ["114", "70", "44"]
     },
     {
       "id": "6",
       "name": "Koga",
       "badges": 5,
-      "pokemonIds": [
-        "48",
-        "49"
-      ]
+      "pokemonIds": ["48", "49"]
     },
     {
       "id": "7",
       "name": "Sabrina",
       "badges": 6,
-      "pokemonIds": [
-        "63",
-        "64",
-        "65"
-      ]
+      "pokemonIds": ["63", "64", "65"]
     },
     {
       "id": "8",
       "name": "Blaine",
       "badges": 7,
-      "pokemonIds": [
-        "38",
-        "78",
-        "59"
-      ]
+      "pokemonIds": ["38", "78", "59"]
     },
     {
       "id": "9",
       "name": "Giovanni",
       "badges": 8,
-      "pokemonIds": [
-        "51",
-        "53",
-        "31",
-        "34",
-        "112"
-      ]
+      "pokemonIds": ["51", "53", "31", "34", "112"]
     },
     {
       "id": "10",
       "name": "Gary",
       "badges": 9,
-      "pokemonIds": [
-        "28",
-        "65",
-        "103",
-        "82",
-        "38",
-        "134"
-      ]
+      "pokemonIds": ["28", "65", "103", "82", "38", "134"]
     },
     {
       "id": "11",
       "name": "Team Rocket",
       "badges": 0,
-      "pokemonIds": [
-        "23",
-        "52",
-        "109"
-      ]
+      "pokemonIds": ["23", "52", "109"]
     },
     {
       "id": "12",
       "name": "Lance",
       "badges": 9,
-      "pokemonIds": [
-        "130",
-        "148",
-        "149",
-        "142"
-      ]
+      "pokemonIds": ["130", "148", "149", "142"]
     }
   ]
 }

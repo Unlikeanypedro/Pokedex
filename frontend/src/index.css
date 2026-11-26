@@ -99,7 +99,9 @@ body {
   font: inherit;
   font-size: 0.9rem;
   cursor: pointer;
-  transition: color 0.2s ease, background 0.2s ease;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
 }
 
 .view-toggle button.active {
@@ -168,7 +170,10 @@ body {
   font-size: 0.85rem;
   cursor: pointer;
   box-shadow: 0 3px 0 var(--line);
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.2s ease;
 }
 
 .type-button:hover {
@@ -199,7 +204,10 @@ body {
   font: inherit;
   cursor: pointer;
   box-shadow: 0 4px 0 var(--line);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .pokemon-card:hover {
@@ -468,7 +476,10 @@ body {
   font: inherit;
   font-size: 0.82rem;
   cursor: pointer;
-  transition: border-color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.15s ease;
 }
 
 .team-chip:hover {
@@ -579,7 +590,7 @@ body {
   gap: 4px;
 }
 
-.pokemon-form-fields input:not([type='checkbox']) {
+.pokemon-form-fields input:not([type="checkbox"]) {
   width: 100%;
   padding: 8px;
   border: 1px solid var(--line);

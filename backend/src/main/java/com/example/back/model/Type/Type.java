@@ -41,11 +41,7 @@ public class Type {
     public Type() {}
 
     // Construtor completo
-    public Type(
-        String id,
-        String name,
-        HashMap<String, List<Integer>> effectiveness
-    ) {
+    public Type(String id, String name, HashMap<String, List<Integer>> effectiveness) {
         this.id = id;
         this.name = name;
         this.effectiveness = effectiveness;

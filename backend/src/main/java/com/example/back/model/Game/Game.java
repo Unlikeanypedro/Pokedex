@@ -41,13 +41,7 @@ public class Game {
 
     public Game() {}
 
-    public Game(
-        String id,
-        String nome,
-        int geracao,
-        String plataforma,
-        String tipo
-    ) {
+    public Game(String id, String nome, int geracao, String plataforma, String tipo) {
         this.id = id;
         this.nome = nome;
         this.geracao = geracao;

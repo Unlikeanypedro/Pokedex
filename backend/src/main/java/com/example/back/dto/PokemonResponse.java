@@ -6,9 +6,4 @@ import java.util.List;
 /**
  * Pokémon devolvido pela API, com os tipos já resolvidos ({id, name}).
  */
-public record PokemonResponse(
-    String id,
-    String name,
-    PokemonStats stats,
-    List<TypeRef> types
-) {}
+public record PokemonResponse(String id, String name, PokemonStats stats, List<TypeRef> types) {}

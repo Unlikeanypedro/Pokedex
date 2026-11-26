@@ -1,11 +1,10 @@
 package com.example.back.controller;
 
 import com.example.back.service.StatusService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Diz se a API está no ar e se o MongoDB Atlas responde.
@@ -24,7 +23,7 @@ public class StatusController {
         this.statusService = statusService;
     }
 
-    @GetMapping({"/", "/api/status"})
+    @GetMapping({ "/", "/api/status" })
     public Map<String, String> status() {
         Map<String, String> resposta = new LinkedHashMap<>();
         resposta.put("api", "online");

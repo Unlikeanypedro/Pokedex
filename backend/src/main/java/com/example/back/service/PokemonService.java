@@ -29,10 +29,7 @@ public class PokemonService {
     private final TypeRepository typeRepository;
 
     // Injeção de dependência pelo construtor (equivale ao @Autowired no atributo)
-    public PokemonService(
-        PokemonRepository pokemonRepository,
-        TypeRepository typeRepository
-    ) {
+    public PokemonService(PokemonRepository pokemonRepository, TypeRepository typeRepository) {
         this.pokemonRepository = pokemonRepository;
         this.typeRepository = typeRepository;
     }
@@ -44,17 +41,17 @@ public class PokemonService {
         if (name == null || name.isBlank()) {
             pokemons = pokemonRepository.findAll(Sort.by("name"));
         } else {
-            pokemons = pokemonRepository.findByNameContainingIgnoreCaseOrderByNameAsc(
-                name.trim()
-            );
+            pokemons = pokemonRepository.findByNameContainingIgnoreCaseOrderByNameAsc(name.trim());
         }
 
         // Carrega os tipos uma única vez para não consultar o banco por Pokémon
-        Map<String, String> nomesDosTipos = typeRepository.findAll()
+        Map<String, String> nomesDosTipos = typeRepository
+            .findAll()
             .stream()
             .collect(Collectors.toMap(Type::getId, Type::getName));
 
-        return pokemons.stream()
+        return pokemons
+            .stream()
             .map(pokemon -> montarResposta(pokemon, nomesDosTipos))
             .toList();
     }
@@ -105,41 +102,36 @@ public class PokemonService {
 
     /** Converte o documento do MongoDB no formato da API (tipos com nome). */
     private PokemonResponse montarResposta(Pokemon pokemon) {
-        Map<String, String> nomesDosTipos = typeRepository.findAll()
+        Map<String, String> nomesDosTipos = typeRepository
+            .findAll()
             .stream()
             .collect(Collectors.toMap(Type::getId, Type::getName));
 
         return montarResposta(pokemon, nomesDosTipos);
     }
 
-    private PokemonResponse montarResposta(
-        Pokemon pokemon,
-        Map<String, String> nomesDosTipos
-    ) {
-        List<TypeRef> tipos = pokemon.getTypes() == null
-            ? List.of()
-            : pokemon.getTypes()
-                  .stream()
-                  .map(tipoId -> new TypeRef(
-                      String.valueOf(tipoId),
-                      nomesDosTipos.getOrDefault(String.valueOf(tipoId), "Desconhecido")
-                  ))
-                  .toList();
+    private PokemonResponse montarResposta(Pokemon pokemon, Map<String, String> nomesDosTipos) {
+        List<TypeRef> tipos =
+            pokemon.getTypes() == null
+                ? List.of()
+                : pokemon
+                      .getTypes()
+                      .stream()
+                      .map(tipoId ->
+                          new TypeRef(
+                              String.valueOf(tipoId),
+                              nomesDosTipos.getOrDefault(String.valueOf(tipoId), "Desconhecido")
+                          )
+                      )
+                      .toList();
 
-        return new PokemonResponse(
-            pokemon.getId(),
-            pokemon.getName(),
-            pokemon.getStats(),
-            tipos
-        );
+        return new PokemonResponse(pokemon.getId(), pokemon.getName(), pokemon.getStats(), tipos);
     }
 
     /** Valida os campos obrigatórios (lança 400 pelo GlobalExceptionHandler). */
     private void validar(PokemonRequest dados) {
         if (dados == null) {
-            throw new DadosInvalidosException(
-                "Envie os dados do pokémon no corpo da requisição."
-            );
+            throw new DadosInvalidosException("Envie os dados do pokémon no corpo da requisição.");
         }
         if (dados.name() == null || dados.name().isBlank()) {
             throw new DadosInvalidosException("O nome do pokémon é obrigatório.");
@@ -156,9 +148,7 @@ public class PokemonService {
         validarStat("Velocidade", dados.stats().getSpeed());
 
         if (dados.types() == null || dados.types().isEmpty()) {
-            throw new DadosInvalidosException(
-                "Informe ao menos um tipo para o pokémon."
-            );
+            throw new DadosInvalidosException("Informe ao menos um tipo para o pokémon.");
         }
 
         for (TypeRef tipo : dados.types()) {
@@ -166,18 +156,14 @@ public class PokemonService {
                 throw new DadosInvalidosException("Tipo inválido na lista de tipos.");
             }
             if (!typeRepository.existsById(tipo.id())) {
-                throw new DadosInvalidosException(
-                    "O tipo " + tipo.id() + " não existe."
-                );
+                throw new DadosInvalidosException("O tipo " + tipo.id() + " não existe.");
             }
         }
     }
 
     private void validarStat(String nome, int valor) {
         if (valor < 0 || valor > 255) {
-            throw new DadosInvalidosException(
-                "O valor de " + nome + " deve estar entre 0 e 255."
-            );
+            throw new DadosInvalidosException("O valor de " + nome + " deve estar entre 0 e 255.");
         }
     }
 

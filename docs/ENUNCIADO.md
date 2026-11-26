@@ -42,12 +42,12 @@ Para esta atividade, será disponibilizado o arquivo:
 
 O script contém os dados utilizados na Pokédex, incluindo:
 
-* 🐾 Pokémon e seus atributos.
-* 🧬 Tipos dos Pokémon.
-* 🧑‍🚀 Treinadores.
-* 🏅 Insígnias.
-* 🔗 Relações entre Pokémon e tipos.
-* 🔗 Relações entre treinadores e Pokémon.
+- 🐾 Pokémon e seus atributos.
+- 🧬 Tipos dos Pokémon.
+- 🧑‍🚀 Treinadores.
+- 🏅 Insígnias.
+- 🔗 Relações entre Pokémon e tipos.
+- 🔗 Relações entre treinadores e Pokémon.
 
 O script deverá ser utilizado como **fonte de dados para popular o MongoDB**.
 
@@ -92,13 +92,13 @@ A dupla deverá criar um **backend REST utilizando Spring Boot** para disponibil
 
 O projeto deverá utilizar:
 
-* ☕ Spring Boot
-* 🌐 Spring Web
-* 🗄️ Spring Data MongoDB
-* 🧩 Controller
-* ⚙️ Service
-* 📦 Repository
-* 🗂️ Model
+- ☕ Spring Boot
+- 🌐 Spring Web
+- 🗄️ Spring Data MongoDB
+- 🧩 Controller
+- ⚙️ Service
+- 📦 Repository
+- 🗂️ Model
 
 ---
 
@@ -138,10 +138,10 @@ React → Spring Boot → MongoDB
 
 A interface desenvolvida na Atividade 03 deverá continuar funcionando, incluindo:
 
-* 🔎 Pesquisa de Pokémon.
-* 🧬 Filtro por tipo.
-* 📄 Visualização dos detalhes.
-* 📊 Exibição dos atributos.
+- 🔎 Pesquisa de Pokémon.
+- 🧬 Filtro por tipo.
+- 📄 Visualização dos detalhes.
+- 📊 Exibição dos atributos.
 
 > ⚠️ **Não é necessário refazer a interface da Atividade 03.** O objetivo é integrar o frontend já desenvolvido com o novo backend.
 
@@ -151,9 +151,9 @@ A interface desenvolvida na Atividade 03 deverá continuar funcionando, incluind
 
 A aplicação deverá possuir uma forma de:
 
-* ➕ Cadastrar Pokémon.
-* ✏️ Editar Pokémon.
-* 🗑️ Excluir Pokémon.
+- ➕ Cadastrar Pokémon.
+- ✏️ Editar Pokémon.
+- 🗑️ Excluir Pokémon.
 
 As operações deverão ser realizadas através da **API REST**, persistindo as alterações no MongoDB.
 
@@ -199,18 +199,18 @@ Utilize variáveis de ambiente ou arquivos de configuração adequados.
 
 A aplicação deverá:
 
-* ⚛️ Reutilizar a Pokédex desenvolvida na Atividade 03.
-* 📄 Utilizar o `Script_Pokedex.sql` como fonte dos dados.
-* ☕ Possuir um backend desenvolvido com Spring Boot.
-* 🌐 Disponibilizar uma API REST.
-* 🗄️ Utilizar MongoDB.
-* 🔎 Buscar os Pokémon através da API.
-* 📄 Consultar detalhes de um Pokémon.
-* ➕ Cadastrar Pokémon.
-* ✏️ Editar Pokémon.
-* 🗑️ Excluir Pokémon.
-* 🔗 Integrar React + Spring Boot + MongoDB.
-* 📄 Possuir um `README.md` com instruções para execução.
+- ⚛️ Reutilizar a Pokédex desenvolvida na Atividade 03.
+- 📄 Utilizar o `Script_Pokedex.sql` como fonte dos dados.
+- ☕ Possuir um backend desenvolvido com Spring Boot.
+- 🌐 Disponibilizar uma API REST.
+- 🗄️ Utilizar MongoDB.
+- 🔎 Buscar os Pokémon através da API.
+- 📄 Consultar detalhes de um Pokémon.
+- ➕ Cadastrar Pokémon.
+- ✏️ Editar Pokémon.
+- 🗑️ Excluir Pokémon.
+- 🔗 Integrar React + Spring Boot + MongoDB.
+- 📄 Possuir um `README.md` com instruções para execução.
 
 ---
 
@@ -218,10 +218,10 @@ A aplicação deverá:
 
 Como funcionalidade adicional, a dupla poderá implementar:
 
-* 🧬 Consultas de Pokémon por tipo.
-* 🧑‍🚀 Persistência dos treinadores no MongoDB.
-* 🔗 Relação entre treinadores e Pokémon.
-* 🔎 Busca por nome através da API.
+- 🧬 Consultas de Pokémon por tipo.
+- 🧑‍🚀 Persistência dos treinadores no MongoDB.
+- 🔗 Relação entre treinadores e Pokémon.
+- 🔎 Busca por nome através da API.
 
 ---
 
@@ -229,14 +229,14 @@ Como funcionalidade adicional, a dupla poderá implementar:
 
 O repositório deverá conter:
 
-* ⚛️ Frontend React + Vite da Atividade 03 integrado ao backend.
-* ☕ Backend Spring Boot.
-* 🗄️ Banco MongoDB funcionando.
-* 🌐 API REST funcionando.
-* 📄 `Script_Pokedex.sql`.
-* 📄 `README.md`.
-* ▶️ Instruções para executar frontend e backend.
-* 🔐 Instruções para configurar o MongoDB.
+- ⚛️ Frontend React + Vite da Atividade 03 integrado ao backend.
+- ☕ Backend Spring Boot.
+- 🗄️ Banco MongoDB funcionando.
+- 🌐 API REST funcionando.
+- 📄 `Script_Pokedex.sql`.
+- 📄 `README.md`.
+- ▶️ Instruções para executar frontend e backend.
+- 🔐 Instruções para configurar o MongoDB.
 
 ---
 

@@ -58,11 +58,7 @@ public class GlobalExceptionHandler {
         NoResourceFoundException ex,
         HttpServletRequest request
     ) {
-        return montar(
-            HttpStatus.NOT_FOUND,
-            "Endpoint não encontrado.",
-            request
-        );
+        return montar(HttpStatus.NOT_FOUND, "Endpoint não encontrado.", request);
     }
 
     // 405 - método HTTP errado (ex.: PATCH em /api/pokemons)
@@ -79,10 +75,7 @@ public class GlobalExceptionHandler {
     }
 
     // 503 - o Spring Boot está no ar, mas não conseguiu falar com o MongoDB Atlas
-    @ExceptionHandler({
-        DataAccessResourceFailureException.class,
-        MongoException.class,
-    })
+    @ExceptionHandler({ DataAccessResourceFailureException.class, MongoException.class })
     public ResponseEntity<ErroResposta> handleMongoIndisponivel(
         Exception ex,
         HttpServletRequest request
@@ -97,15 +90,8 @@ public class GlobalExceptionHandler {
 
     // 500 - qualquer outro erro inesperado
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErroResposta> handleGenerico(
-        Exception ex,
-        HttpServletRequest request
-    ) {
-        return montar(
-            HttpStatus.INTERNAL_SERVER_ERROR,
-            "Erro interno no servidor.",
-            request
-        );
+    public ResponseEntity<ErroResposta> handleGenerico(Exception ex, HttpServletRequest request) {
+        return montar(HttpStatus.INTERNAL_SERVER_ERROR, "Erro interno no servidor.", request);
     }
 
     private ResponseEntity<ErroResposta> montar(
