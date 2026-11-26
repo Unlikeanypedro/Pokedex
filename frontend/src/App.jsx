@@ -10,6 +10,7 @@ import {
   atualizarPokemon,
   buscarPokemon,
   criarPokemon,
+  excluirPokemon,
   listarPokemons,
 } from './service/pokemonService.js'
 import { listarTreinadores } from './service/trainerService.js'
@@ -81,6 +82,15 @@ export default function App() {
     }
     setMensagem(`${salvo.name} ${pokemonEmEdicao ? 'atualizado' : 'cadastrado'} com sucesso.`)
     setFormulario(null)
+  }
+
+  async function removerPokemon(pokemon) {
+    await excluirPokemon(pokemon.id)
+    setCatalogo(({ dados }) => ({
+      dados: dados.filter(({ id }) => id !== pokemon.id),
+    }))
+    setMensagem(`${pokemon.name} excluído com sucesso.`)
+    fecharDetalhes()
   }
 
   useEffect(() => {
@@ -189,6 +199,7 @@ export default function App() {
           mensagem={mensagem}
           onClose={fecharDetalhes}
           onEdit={tipos.dados?.length ? abrirFormulario : undefined}
+          onDelete={removerPokemon}
         />
       )}
       {formulario && (

@@ -1,30 +1,49 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { statLabels } from '../utils/pokemonStats.js'
 import { getTypeColor } from '../utils/typeColors.js'
 import PokemonSprite from './PokemonSprite.jsx'
 
-export default function PokemonDetails({ pokemon, erro, mensagem, onClose, onEdit }) {
+export default function PokemonDetails({ pokemon, erro, mensagem, onClose, onEdit, onDelete }) {
   const closeButton = useRef(null)
+  const [excluindo, setExcluindo] = useState(false)
+  const [erroExclusao, setErroExclusao] = useState('')
 
   useEffect(() => {
     const previousFocus = document.activeElement
-    const handleKey = (event) => {
-      if (event.key === 'Escape') onClose()
-    }
-
     closeButton.current.focus()
-    window.addEventListener('keydown', handleKey)
     document.body.style.overflow = 'hidden'
 
     return () => {
-      window.removeEventListener('keydown', handleKey)
       document.body.style.overflow = ''
       previousFocus?.focus()
     }
-  }, [onClose])
+  }, [])
+
+  useEffect(() => {
+    const handleKey = (event) => {
+      if (event.key === 'Escape' && !excluindo) onClose()
+    }
+    window.addEventListener('keydown', handleKey)
+    return () => window.removeEventListener('keydown', handleKey)
+  }, [excluindo, onClose])
+
+  async function confirmarExclusao() {
+    if (excluindo || !window.confirm(`Excluir ${pokemon.name} da Pokédex? Essa ação não pode ser desfeita.`)) {
+      return
+    }
+
+    setErroExclusao('')
+    setExcluindo(true)
+    try {
+      await onDelete(pokemon)
+    } catch (falha) {
+      setErroExclusao(falha.message)
+      setExcluindo(false)
+    }
+  }
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
+    <div className="modal-overlay" onClick={excluindo ? undefined : onClose}>
       <section
         className="details"
         role="dialog"
@@ -42,7 +61,13 @@ export default function PokemonDetails({ pokemon, erro, mensagem, onClose, onEdi
             )}
             <h2 id="pokemon-details-title">{pokemon?.name ?? 'Detalhes do Pokémon'}</h2>
           </div>
-          <button ref={closeButton} className="close-button" onClick={onClose} aria-label="Fechar detalhes">
+          <button
+            ref={closeButton}
+            className="close-button"
+            onClick={onClose}
+            disabled={excluindo}
+            aria-label="Fechar detalhes"
+          >
             ×
           </button>
         </div>
@@ -78,13 +103,26 @@ export default function PokemonDetails({ pokemon, erro, mensagem, onClose, onEdi
                 </div>
               ))}
             </div>
-            {onEdit && (
-              <div className="pokemon-actions">
-                <button className="pokemon-action" onClick={() => onEdit(pokemon)}>
+            {erroExclusao && <p className="pokemon-form-error" role="alert">{erroExclusao}</p>}
+            {excluindo && <p role="status">Excluindo Pokémon…</p>}
+            <div className="pokemon-actions">
+              {onEdit && (
+                <button
+                  className="pokemon-action"
+                  onClick={() => onEdit(pokemon)}
+                  disabled={excluindo}
+                >
                   Editar Pokémon
                 </button>
-              </div>
-            )}
+              )}
+              <button
+                className="pokemon-action danger"
+                onClick={confirmarExclusao}
+                disabled={excluindo}
+              >
+                Excluir Pokémon
+              </button>
+            </div>
           </>
         )}
       </section>

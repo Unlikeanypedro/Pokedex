@@ -526,6 +526,16 @@ body {
   color: white;
 }
 
+.pokemon-action.danger {
+  border-color: var(--red-dark);
+  color: var(--red-dark);
+}
+
+.pokemon-action.danger:hover:not(:disabled) {
+  background: var(--red-dark);
+  color: white;
+}
+
 .pokemon-action:disabled {
   opacity: 0.6;
   cursor: default;
