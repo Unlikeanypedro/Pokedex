@@ -9,11 +9,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * Exemplo de como fica no Atlas:
  * { "_id": 1, "nome": "Pikachu", "tamanho": "70cm", "type": "Engenharia de Software" }
  */
-@Document(collection = "alunos")
-public class Pokemon {1
+@Document(collection = "pokemons")
+public class Pokemon {
 
     @Id
     private String id;
+
     private String nome;
     private int health;
     private int attack;
@@ -23,10 +24,18 @@ public class Pokemon {1
     private int speed;
 
     // Construtor vazio: usado pelo Spring/Jackson para montar o objeto a partir do JSON
-    public Pokemon() {
-    }
+    public Pokemon() {}
 
-    public Pokemon( String id, String nome, int health, int attack , int defense ,int special_Attack, int special_Defense, int speed) {
+    public Pokemon(
+        String id,
+        String nome,
+        int health,
+        int attack,
+        int defense,
+        int special_Attack,
+        int special_Defense,
+        int speed
+    ) {
         this.id = id;
         this.nome = nome;
         this.health = health;
@@ -54,51 +63,51 @@ public class Pokemon {1
         this.nome = nome;
     }
 
-    public int getHeath(){
+    public int getHeath() {
         return this.health;
     }
 
-    public void setHeath(int health){
+    public void setHeath(int health) {
         this.health = health;
     }
 
-    public int getAttack(){
+    public int getAttack() {
         return this.attack;
     }
 
-    public void setAttack(int attack){
+    public void setAttack(int attack) {
         this.attack = attack;
     }
 
-    public int getDefense(){
+    public int getDefense() {
         return this.defense;
     }
 
-    public void setDefense(int defense){
+    public void setDefense(int defense) {
         this.defense = defense;
     }
 
-    public int getSpecialAttack(){
+    public int getSpecialAttack() {
         return this.special_Attack;
     }
 
-    public void setSpecialAttack(int special_Attack){
+    public void setSpecialAttack(int special_Attack) {
         this.special_Attack = special_Attack;
     }
 
-    public int getSpecialDefense(){
+    public int getSpecialDefense() {
         return this.special_Defense;
     }
 
-    public void setSpecialDefense(int special_Defense){
+    public void setSpecialDefense(int special_Defense) {
         this.special_Defense = special_Defense;
     }
 
-    public int getSpeed(){
+    public int getSpeed() {
         return this.speed;
     }
 
-    public void setSpeed(int speed){
+    public void setSpeed(int speed) {
         this.speed = speed;
     }
 }
