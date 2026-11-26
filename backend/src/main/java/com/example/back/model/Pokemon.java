@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * Documento salvo na coleção "pokemons" do MongoDB.
  *
  * Exemplo de como fica no Atlas:
- * { "_id": 1, "nome": "Pikachu", "tamanho": "70cm", "type": "Engenharia de Software" }
+ * { "_id": 1, "nome": "Pikachu", "tamanho": "70cm", "type": "Elétrico" }
  */
 @Document(collection = "pokemons")
 public class Pokemon {
