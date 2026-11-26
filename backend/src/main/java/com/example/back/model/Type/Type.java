@@ -11,13 +11,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * Cada tipo possui:
  * - ID;
  * - Nome;
- * - Efetividade contra os demais tipos.
+ * - Efetividade contra os demais tipos (opcional, usado na expansão).
  *
  * Exemplo de como fica no MongoDB Atlas:
  *
  * {
  *   "_id": "5",
- *   "nome": "Electric",
+ *   "name": "Electric",
  *   "effectiveness": {
  *     "superEffective": [3, 10],
  *     "notVeryEffective": [5, 4, 16],
@@ -33,7 +33,7 @@ public class Type {
     @Id
     private String id;
 
-    private String nome;
+    private String name;
 
     private HashMap<String, List<Integer>> effectiveness;
 
@@ -43,11 +43,11 @@ public class Type {
     // Construtor completo
     public Type(
         String id,
-        String nome,
+        String name,
         HashMap<String, List<Integer>> effectiveness
     ) {
         this.id = id;
-        this.nome = nome;
+        this.name = name;
         this.effectiveness = effectiveness;
     }
 
@@ -61,12 +61,12 @@ public class Type {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public HashMap<String, List<Integer>> getEffectiveness() {

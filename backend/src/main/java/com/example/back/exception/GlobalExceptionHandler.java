@@ -52,7 +52,7 @@ public class GlobalExceptionHandler {
         );
     }
 
-    // 404 - endereço que não existe na API (ex.: /api/alunoz)
+    // 404 - endereço que não existe na API (ex.: /api/pokemonz)
     @ExceptionHandler(NoResourceFoundException.class)
     public ResponseEntity<ErroResposta> handleRotaInexistente(
         NoResourceFoundException ex,
@@ -65,7 +65,7 @@ public class GlobalExceptionHandler {
         );
     }
 
-    // 405 - método HTTP errado (ex.: PATCH em /api/alunos)
+    // 405 - método HTTP errado (ex.: PATCH em /api/pokemons)
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public ResponseEntity<ErroResposta> handleMetodo(
         HttpRequestMethodNotSupportedException ex,

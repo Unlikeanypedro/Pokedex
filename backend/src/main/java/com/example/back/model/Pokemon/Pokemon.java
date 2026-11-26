@@ -16,7 +16,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * Exemplo de como fica no MongoDB Atlas:
  * {
  *   "_id": "25",
- *   "nome": "Pikachu",
+ *   "name": "Pikachu",
  *   "stats": {
  *     "hp": 35,
  *     "attack": 55,
@@ -35,7 +35,7 @@ public class Pokemon {
     @Id
     private String id;
 
-    private String nome;
+    private String name;
 
     private PokemonStats stats;
 
@@ -47,12 +47,12 @@ public class Pokemon {
     // Construtor completo
     public Pokemon(
         String id,
-        String nome,
+        String name,
         PokemonStats stats,
         List<Integer> types
     ) {
         this.id = id;
-        this.nome = nome;
+        this.name = name;
         this.stats = stats;
         this.types = types;
     }
@@ -67,12 +67,12 @@ public class Pokemon {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public PokemonStats getStats() {

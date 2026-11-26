@@ -11,11 +11,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * - Nome;
  * - Quantidade de insígnias.
  *
+ * O time do treinador fica na coleção "trainer_teams" (TrainerTeam).
+ *
  * Exemplo de como fica no MongoDB Atlas:
  *
  * {
  *   "_id": "1",
- *   "nome": "Ash",
+ *   "name": "Ash",
  *   "badges": 9
  * }
  */
@@ -26,7 +28,7 @@ public class Trainer {
     @Id
     private String id;
 
-    private String nome;
+    private String name;
 
     private int badges;
 
@@ -34,9 +36,9 @@ public class Trainer {
     public Trainer() {}
 
     // Construtor completo
-    public Trainer(String id, String nome, int badges) {
+    public Trainer(String id, String name, int badges) {
         this.id = id;
-        this.nome = nome;
+        this.name = name;
         this.badges = badges;
     }
 
@@ -50,12 +52,12 @@ public class Trainer {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getBadges() {

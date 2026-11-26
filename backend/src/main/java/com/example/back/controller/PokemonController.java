@@ -1,6 +1,7 @@
 package com.example.back.controller;
 
-import com.example.back.model.Pokemon.Pokemon;
+import com.example.back.dto.PokemonRequest;
+import com.example.back.dto.PokemonResponse;
 import com.example.back.service.PokemonService;
 import java.util.List;
 import org.springframework.http.HttpStatus;
@@ -8,16 +9,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * Endpoints REST do CRUD de pokemons. É aqui que o front-end React "bate".
+ * Endpoints REST do CRUD de pokémons. É aqui que o front-end React "bate".
  *
- * | Método | Endpoint                  | O que faz                      | Resposta  |
- * | ------ | ------------------------- | ------------------------------ | --------- |
- * | GET    | /api/pokemons              | Lista todos                    | 200       |
- * | GET    | /api/pokemons?nome=pikachu | Busca pelo nome                | 200       |
- * | GET    | /api/pokemons/{id}         | Busca um aluno                 | 200 / 404 |
- * | POST   | /api/pokemons              | Cadastra                       | 201 / 400 |
- * | PUT    | /api/pokemons/{id}         | Atualiza                       | 200 / 404 |
- * | DELETE | /api/pokemons/{id}         | Exclui                         | 204 / 404 |
+ * | Método | Endpoint                | O que faz            | Resposta  |
+ * | ------ | ----------------------- | -------------------- | --------- |
+ * | GET    | /api/pokemons           | Lista todos          | 200       |
+ * | GET    | /api/pokemons?name=pika | Busca pelo nome      | 200       |
+ * | GET    | /api/pokemons/{id}      | Busca um pokémon     | 200 / 404 |
+ * | POST   | /api/pokemons           | Cadastra             | 201 / 400 |
+ * | PUT    | /api/pokemons/{id}      | Atualiza             | 200 / 404 |
+ * | DELETE | /api/pokemons/{id}      | Exclui               | 204 / 404 |
  */
 @RestController
 @RequestMapping("/api/pokemons")
@@ -30,28 +31,30 @@ public class PokemonController {
     }
 
     // http://localhost:8080/api/pokemons
-    // http://localhost:8080/api/pokemons?nome=pikachu
+    // http://localhost:8080/api/pokemons?name=pikachu
     @GetMapping
-    public List<Pokemon> listar(@RequestParam(required = false) String nome) {
-        return pokemonService.listar(nome);
+    public List<PokemonResponse> listar(@RequestParam(required = false) String name) {
+        return pokemonService.listar(name);
     }
 
-    // http://localhost:8080/api/alunos/{id}
+    // http://localhost:8080/api/pokemons/{id}
     @GetMapping("/{id}")
-    public Pokemon buscarPorId(@PathVariable String id) {
+    public PokemonResponse buscarPorId(@PathVariable String id) {
         return pokemonService.buscarPorId(id);
     }
 
     @PostMapping
-    public ResponseEntity<Pokemon> inserir(@RequestBody Pokemon pokemon) {
-        Pokemon criado = pokemonService.inserir(pokemon);
+    public ResponseEntity<PokemonResponse> inserir(
+        @RequestBody PokemonRequest pokemon
+    ) {
+        PokemonResponse criado = pokemonService.inserir(pokemon);
         return ResponseEntity.status(HttpStatus.CREATED).body(criado);
     }
 
     @PutMapping("/{id}")
-    public Pokemon atualizar(
+    public PokemonResponse atualizar(
         @PathVariable String id,
-        @RequestBody Pokemon pokemon
+        @RequestBody PokemonRequest pokemon
     ) {
         return pokemonService.atualizar(id, pokemon);
     }

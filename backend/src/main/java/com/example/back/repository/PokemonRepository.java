@@ -10,6 +10,6 @@ public interface PokemonRepository extends MongoRepository<Pokemon, String> {
     // Métodos de CRUD já estão disponíveis:
     // findAll, findById, save, deleteById, existsById
 
-    // Consulta personalizada: alunos cujo nome contém o texto (sem diferenciar maiúsculas)
-    List<Pokemon> findByNomeContainingIgnoreCaseOrderByNomeAsc(String nome);
+    // Consulta personalizada: pokémons cujo nome contém o texto (sem diferenciar maiúsculas)
+    List<Pokemon> findByNameContainingIgnoreCaseOrderByNameAsc(String name);
 }
