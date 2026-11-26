@@ -1,6 +1,6 @@
 package com.example.back.controller;
 
-import com.example.back.model.Pokemon;
+import com.example.back.model.Pokemon.Pokemon;
 import com.example.back.service.PokemonService;
 import java.util.List;
 import org.springframework.http.HttpStatus;

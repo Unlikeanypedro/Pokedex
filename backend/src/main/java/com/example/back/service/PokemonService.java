@@ -2,7 +2,7 @@ package com.example.back.service;
 
 import com.example.back.exception.DadosInvalidosException;
 import com.example.back.exception.PokemonNaoEncontradoException;
-import com.example.back.model.Pokemon;
+import com.example.back.model.Pokemon.Pokemon;
 import com.example.back.repository.PokemonRepository;
 import java.util.List;
 import org.springframework.data.domain.Sort;
