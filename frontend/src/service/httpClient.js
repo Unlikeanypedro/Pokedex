@@ -8,7 +8,7 @@ import API_CONFIG from "../config/apiConfig";
  * - Back-end respondeu com erro (400, 404, 503...) → lemos o campo "mensagem"
  *   que o GlobalExceptionHandler do Spring Boot devolve
  *
- * @param {string} caminho Caminho da API, ex.: "/api/alunos"
+ * @param {string} caminho Caminho da API, ex.: "/api/pokemons"
  * @param {RequestInit} opcoes Método, corpo etc. (mesmas opções do fetch)
  */
 export async function requisicao(caminho, opcoes = {}) {
