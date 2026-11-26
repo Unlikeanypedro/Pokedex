@@ -4,9 +4,17 @@ Este projeto teve como ponto de partida a **Atividade 04 – Pokédex com Spring
 
 Os documentos e especificações oficiais da atividade presentes neste repositório registram esse contexto inicial e definem os requisitos originais do projeto, incluindo a utilização do `Script_Pokedex.sql`, a criação da API REST, a integração entre React, Spring Boot e MongoDB, além das operações de cadastro, edição, consulta e exclusão de Pokémon.
 
+O [enunciado](ENUNCIADO.md) descreve a atividade e o [script SQL](Script_Pokedex.sql)
+fornece os dados iniciais. Os comandos de execução e o roteiro de validação
+estão no [README principal](../README.md).
+
 ### Expansão do escopo
 
 Durante o desenvolvimento, o projeto deixou de ser tratado apenas como uma implementação pontual da atividade acadêmica e passou a ser planejado como uma **aplicação Pokédex mais completa, escalável e preparada para hospedagem e evolução futura**.
+
+O [diagrama UML](Diagrama%20UML%20da%20Pokédex%20MongoDB.png) representa a
+proposta de expansão. O [README principal](../README.md#coleções-no-mongodb)
+registra as coleções em uso e os modelos que ainda aguardam endpoints.
 
 A expansão do projeto foi uma **decisão autoral do autor**, realizada a partir da proposta inicial da atividade. As funcionalidades adicionais, a ampliação do domínio, a organização das entidades e a preocupação com escalabilidade foram concebidas para transformar a implementação acadêmica inicial em uma aplicação com estrutura mais próxima de um projeto real.
 

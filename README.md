@@ -1,8 +1,9 @@
 # Pokédex — React + Spring Boot + MongoDB
 
-Continuação da **Atividade 03 (Pokédex em React + Vite)** para a **Atividade 04**:
-os dados deixam de vir do arquivo `pokedex-data.json` e passam a vir de uma
-**API REST em Spring Boot** com persistência no **MongoDB**.
+A **Atividade 04** integra a interface React + Vite da Atividade 03 a uma
+**API REST em Spring Boot** com persistência no **MongoDB**. A interface permite
+pesquisar Pokémon por nome ou ID, filtrar por tipo, consultar atributos e times
+de treinadores, cadastrar, editar e excluir Pokémon.
 
 ```text
 Script_Pokedex.sql → MongoDB → Spring Boot REST API → React + Vite
@@ -24,7 +25,7 @@ expansão estão em [`docs/README.md`](docs/README.md).
 - [Endpoints da API](#endpoints-da-api)
 - [Seed dos dados](#seed-dos-dados)
 - [Coleções no MongoDB](#coleções-no-mongodb)
-- [Situação atual da integração](#situação-atual-da-integração)
+- [Roteiro de validação](#roteiro-de-validação)
 - [Problemas comuns](#problemas-comuns)
 
 ---
@@ -50,8 +51,8 @@ Pokedex/
 │   └── pom.xml
 ├── frontend/                 React 19 + Vite 8
 │   └── src/
-│       ├── components/       Cards, lista, detalhes, filtro, busca
-│       ├── data/             pokedex-data.json (dados locais da Atividade 03)
+│       ├── components/       Cards, lista, detalhes, busca, filtro e formulário
+│       ├── config/           URL base da API
 │       ├── service/          httpClient, pokemon, trainer, type e status
 │       └── App.jsx
 ├── docs/
@@ -66,38 +67,45 @@ Pokedex/
 
 ## Pré-requisitos
 
-- **Java 17+** (o projeto compila com `release 17`)
-- **Node.js 18+** (ou Bun) para o frontend
-- Uma conta/cluster no **MongoDB Atlas** (ou um MongoDB local)
+- **JDK 17 ou superior**. O Maven Wrapper baixa a versão do Maven usada pelo projeto.
+- **Node.js com npm**, nas versões compatíveis com o lockfile do Vite 8 (`^20.19.0 || >=22.12.0`).
+- **MongoDB Atlas** ou uma instância do **MongoDB local**.
 
 ---
 
 ## Configuração do MongoDB
 
-As credenciais **não vão para o Git**.
+Na raiz do projeto, copie o arquivo de configuração de exemplo.
 
-1. Copie o template:
+```bash
+cp .env.example .env
+```
 
-   ```bash
-   cp .env.example .env
-   ```
+O Spring Boot lê o `.env` como um arquivo `.properties`. Preencha os valores sem
+aspas. Também é possível definir `MONGODB_URI` e `MONGODB_DB` no ambiente.
+Mantenha as credenciais no backend. O Git ignora o `.env`.
 
-2. Preencha o `.env` na raiz do projeto:
+### MongoDB Atlas
 
-   ```properties
-   MONGODB_URI=mongodb+srv://usuario:senha@cluster.exemplo.mongodb.net/?retryWrites=true&w=majority
-   MONGODB_DB=pokedex
-   ```
+1. No cluster, crie um usuário de banco com permissão de leitura e escrita no banco escolhido.
+2. Adicione o IP da máquina que executará o backend à lista de acesso do projeto Atlas.
+3. Copie a URI em **Connect → Drivers → Java** e preencha `MONGODB_URI` com os dados
+   do cluster. Codifique os caracteres reservados da senha. Por exemplo, `@` vira
+   `%40`. [Documentação do MongoDB Atlas](https://www.mongodb.com/docs/atlas/driver-connection/)
 
-   > O arquivo é lido como `.properties` pelo Spring Boot — **não use aspas** nos
-   > valores. Se a senha tiver caracteres especiais (`@ : / ? # %`), codifique-os
-   > (por exemplo, `@` vira `%40`).
+```properties
+MONGODB_URI=mongodb+srv://usuario:senha@cluster.exemplo.mongodb.net/?retryWrites=true&w=majority
+MONGODB_DB=pokedex
+```
 
-3. No Atlas, libere o acesso de rede (`Network Access → Add IP Address`).
+### MongoDB local
 
-O backend lê o `.env` da raiz pelo `spring.config.import` em
-`backend/src/main/resources/application.properties`; as variáveis
-`MONGODB_URI` e `MONGODB_DB` também funcionam se definidas no ambiente.
+Com o MongoDB rodando em `127.0.0.1:27017`, use estas configurações no `.env`.
+
+```properties
+MONGODB_URI=mongodb://127.0.0.1:27017
+MONGODB_DB=pokedex
+```
 
 ---
 
@@ -105,10 +113,11 @@ O backend lê o `.env` da raiz pelo `spring.config.import` em
 
 ```bash
 cd backend
-./mvnw spring-boot:run      # Windows: mvnw.cmd spring-boot:run
+sh ./mvnw spring-boot:run
 ```
 
-A API sobe em **http://localhost:8080**.
+No PowerShell, execute `.\mvnw.cmd spring-boot:run` dentro de `backend`.
+A API fica disponível em **http://localhost:8080**.
 
 Para conferir a conexão com o banco:
 
@@ -126,20 +135,28 @@ Na primeira execução, o `DataSeeder` popula o banco automaticamente
 
 ```bash
 cd frontend
-npm install
-npm run dev
+npm ci
+npm run dev -- --strictPort
 ```
 
 Abra **http://localhost:5173**.
 
-O endereço da API vem de `VITE_API_URL` (padrão: `http://localhost:8080`) e é
-lido em `src/config/apiConfig.js`.
+O endereço padrão da API é `http://localhost:8080`. Para usar outro endereço,
+defina `VITE_API_URL` em `frontend/.env` antes de iniciar o Vite ou gerar o build.
 
 Build de produção:
 
 ```bash
 npm run build
-npm run preview
+npm run preview -- --strictPort
+```
+
+A prévia fica em **http://localhost:4173**. Para liberar essa origem, adicione a
+linha abaixo ao `.env` da raiz e reinicie o backend. Use a origem exata que o
+navegador abre, incluindo a porta.
+
+```properties
+app.cors.allowed-origins=http://localhost:5173,http://localhost:4173
 ```
 
 ---
@@ -176,20 +193,21 @@ npm run preview
 }
 ```
 
-No MongoDB, `types` guarda apenas os IDs (`[5]`); a API devolve os tipos já
-resolvidos com o nome.
+No MongoDB, `types` guarda os IDs (`[5]`). A API devolve os tipos com seus nomes.
+O `id` do Pokémon é uma string. O backend gera um novo ID no cadastro.
 
 ### Exemplos
 
 ```bash
-# listar
-curl http://localhost:8080/api/pokemons
+# listar e consultar um Pokémon
+curl -i http://localhost:8080/api/pokemons
+curl -i http://localhost:8080/api/pokemons/25
 
 # buscar por nome
 curl "http://localhost:8080/api/pokemons?name=char"
 
 # cadastrar
-curl -X POST http://localhost:8080/api/pokemons \
+curl -i -X POST http://localhost:8080/api/pokemons \
   -H "Content-Type: application/json" \
   -d '{
     "name": "Testemon",
@@ -197,13 +215,15 @@ curl -X POST http://localhost:8080/api/pokemons \
     "types": [{"id": "5", "name": "Electric"}]
   }'
 
-# atualizar
-curl -X PUT http://localhost:8080/api/pokemons/SEU_ID \
+# substituir SEU_ID pelo id retornado no cadastro
+POKEMON_ID=SEU_ID
+curl -i -X PUT "http://localhost:8080/api/pokemons/${POKEMON_ID}" \
   -H "Content-Type: application/json" \
   -d '{"name":"Editado","stats":{"hp":1,"attack":1,"defense":1,"specialAttack":1,"specialDefense":1,"speed":1},"types":[{"id":"2","name":"Fire"}]}'
 
-# excluir
-curl -X DELETE http://localhost:8080/api/pokemons/SEU_ID
+# excluir e conferir a resposta 404
+curl -i -X DELETE "http://localhost:8080/api/pokemons/${POKEMON_ID}"
+curl -i "http://localhost:8080/api/pokemons/${POKEMON_ID}"
 ```
 
 Erros seguem um formato único:
@@ -230,16 +250,18 @@ Erros seguem um formato único:
 - 12 treinadores com insígnias;
 - 12 times (relação treinador ↔ Pokémon).
 
-O `DataSeeder` roda no start e **só insere se a coleção `pokemons` estiver
-vazia** — reiniciar a aplicação não duplica dados. Para subir sem popular:
+O `DataSeeder` registra a conclusão da carga na coleção `seed_metadata`. Se a
+carga for interrompida, a próxima inicialização insere os documentos que
+faltam e preserva os registros existentes. Depois da conclusão, o catálogo
+continua vazio ao reiniciar se todos os Pokémon tiverem sido excluídos.
+Para desativar a carga automática, adicione esta configuração ao `.env` da raiz.
 
 ```properties
 app.seed.enabled=false
 ```
 
-> O script SQL não traz a relação de tipo do Mew; no seed ele foi cadastrado
-> como `Psychic` (ID 11). Os times foram deduplicados (o script repete alguns
-> Pokémon do Koga).
+O tipo do Mew foi preenchido como `Psychic` (ID 11). A conversão também removeu
+as entradas repetidas nos times de Koga e Lance.
 
 ---
 
@@ -251,19 +273,25 @@ app.seed.enabled=false
 | `types` | Tipos (`name`, efetividade opcional) | Em uso |
 | `trainers` | Treinadores (`name`, `badges`) | Em uso |
 | `trainer_teams` | Time de cada treinador (`trainerId`, `pokemonIds`) | Em uso |
+| `seed_metadata` | Registro de conclusão da carga inicial | Em uso |
 | `moves`, `pokemon_moves`, `games`, `pokemon_builds`, `animes` | Modelos da expansão | Modelados, sem endpoints |
 
 ---
 
-## Situação atual da integração
+## Roteiro de validação
 
-- **Backend**: CRUD de Pokémon, listagem de tipos e de treinadores, validação,
-  tratamento de erros, CORS e seed — tudo funcionando contra o MongoDB.
-- **Frontend**: a interface continua consumindo `src/data/pokedex-data.json`.
-  A camada de acesso à API já existe e está pronta
-  (`src/service/pokemonService.js`, `trainerService.js`, `typeService.js`),
-  mas **ainda não foi ligada aos componentes** — falta trocar a origem dos
-  dados no `App.jsx` e adicionar o formulário de cadastro/edição/exclusão.
+1. Use um banco vazio de teste, como `MONGODB_DB=pokedex_teste`. Suba o backend
+   e confira `mongodb: online` em `GET /api/status`. Na primeira carga, confira
+   151 Pokémon, 18 tipos e 12 treinadores com times.
+2. Rode os [exemplos da API](#exemplos). Confira `200` nas consultas, `201` no
+   cadastro, `200` na edição, `204` na exclusão e `404` na consulta do ID excluído.
+   Reinicie o backend com o mesmo banco e confirme o `404` novamente.
+3. No navegador, pesquise por `Pikachu` e `25`, aplique o filtro `Electric` e
+   abra os detalhes pelo catálogo e pelo time de Ash.
+4. Cadastre um Pokémon pela interface, edite um atributo e recarregue a
+   página para conferir o valor salvo. Cancele uma tentativa de exclusão,
+   confirme outra e verifique que o Pokémon desapareceu.
+5. Execute `npm run build` e abra a prévia de produção com o backend rodando.
 
 ---
 
@@ -271,8 +299,8 @@ app.seed.enabled=false
 
 | Sintoma | Causa provável |
 | --- | --- |
-| `503` com "Não foi possível conectar ao MongoDB Atlas" | Connection string inválida ou IP não liberado no Atlas |
+| `503` ou `mongodb: offline` em `/api/status` | Confira a URI, as credenciais e a disponibilidade do banco. No Atlas, confira a lista de IPs permitidos. |
 | Erro de CORS no navegador | Origem do front fora de `app.cors.allowed-origins` |
 | `Port 8080 was already in use` | Já existe outra instância rodando; encerre-a ou use `--server.port=8081` |
-| Lista vazia na API | Coleções vazias e `app.seed.enabled=false`, ou seed rodou antes de o banco existir |
-| `npm: command not found` | Instale o Node.js ou use `bun install && bun run dev` |
+| Lista vazia na API | Confira `MONGODB_DB`, `app.seed.enabled` e o log do seed. Um catálogo esvaziado após a carga permanece vazio. |
+| `npm: command not found` ou aviso de versão do Node.js | Instale uma versão do Node.js com npm conforme os pré-requisitos. |
