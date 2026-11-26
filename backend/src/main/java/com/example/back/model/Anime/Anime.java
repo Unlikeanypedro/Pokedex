@@ -1,4 +1,4 @@
-package com.example.back.model;
+package com.example.back.model.Anime;
 
 import java.util.List;
 import org.springframework.data.annotation.Id;
