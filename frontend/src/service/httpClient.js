@@ -21,7 +21,9 @@ export async function requisicao(caminho, opcoes = {}) {
 
     try {
         resposta = await fetch(url, { ...opcoes, headers });
-    } catch {
+    } catch (erro) {
+        if (opcoes.signal?.aborted) throw erro;
+
         throw new Error(
             `Não foi possível falar com o back-end em ${API_CONFIG.BASE_URL}. ` +
                 "Confira se o Spring Boot está rodando e se o CORS libera este endereço.",
@@ -40,6 +42,11 @@ export async function requisicao(caminho, opcoes = {}) {
             corpo?.mensagem ||
                 `O back-end respondeu com erro ${resposta.status}.`,
         );
+    }
+
+    opcoes.signal?.throwIfAborted();
+    if (corpo === null) {
+        throw new Error("O back-end não retornou os dados esperados.");
     }
 
     return corpo;

@@ -6,19 +6,17 @@ import { requisicao } from "./httpClient";
  * Os tipos já vêm resolvidos do back-end no formato [{ id, name }], então o
  * retorno pode ser usado direto pelos componentes existentes (PokemonCard,
  * PokemonDetails, PokemonList), que esperam `name`, `stats` e `types`.
- *
- * Ainda não está ligado na tela: o App continua lendo o JSON local.
  */
 
 /** Lista todos os Pokémon (ordem alfabética). Com `name`, filtra no back-end. */
-export function listarPokemons({ name } = {}) {
+export function listarPokemons({ name, signal } = {}) {
     const query = name ? `?name=${encodeURIComponent(name)}` : "";
-    return requisicao(`/api/pokemons${query}`);
+    return requisicao(`/api/pokemons${query}`, { signal });
 }
 
 /** Busca um Pokémon pelo id (_id do MongoDB). */
-export function buscarPokemon(id) {
-    return requisicao(`/api/pokemons/${encodeURIComponent(id)}`);
+export function buscarPokemon(id, { signal } = {}) {
+    return requisicao(`/api/pokemons/${encodeURIComponent(id)}`, { signal });
 }
 
 /**
