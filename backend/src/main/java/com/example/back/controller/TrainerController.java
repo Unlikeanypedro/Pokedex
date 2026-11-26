@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /** GET /api/trainers -> treinadores com insígnias e IDs do time. */
 @RestController
-@RequestMapping("/trainers")
+@RequestMapping("/api/trainers")
 public class TrainerController {
 
     private final TrainerService trainerService;

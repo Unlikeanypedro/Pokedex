@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
  * | DELETE | /api/pokemons/{id}      | Exclui               | 204 / 404 |
  */
 @RestController
-@RequestMapping("/pokemons")
+@RequestMapping("/api/pokemons")
 public class PokemonController {
 
     private final PokemonService pokemonService;
