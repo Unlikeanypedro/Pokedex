@@ -1,0 +1,19 @@
+services:
+  backend:
+    build: ./backend
+    environment:
+      MONGODB_URI: "${MONGODB_URI:?Set MONGODB_URI in the root .env}"
+      MONGODB_DB: "${MONGODB_DB:?Set MONGODB_DB in the root .env}"
+      APP_SEED_ENABLED: "${APP_SEED_ENABLED:-false}"
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "127.0.0.1:${POKEDEX_PORT:-5173}:80"
+    depends_on:
+      - backend
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1/api/status | grep -q '\"mongodb\":\"online\"'"]
+      interval: 5s
+      timeout: 5s
+      retries: 12

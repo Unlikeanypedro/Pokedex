@@ -6,14 +6,11 @@ FROM maven:3.9-eclipse-temurin-17 AS build
 
 WORKDIR /app
 
-# Copia primeiro só o pom.xml e baixa as dependências.
-# Assim o Docker reaproveita este passo (cache) quando só o código muda.
 COPY pom.xml .
-RUN mvn -q -B dependency:go-offline
-
-# Copia o código-fonte e gera o .jar (sem rodar testes)
 COPY src ./src
-RUN mvn -q -B clean package -DskipTests
+
+# Reaproveita as dependências e resolve apenas o que o build precisa.
+RUN --mount=type=cache,target=/root/.m2/repository mvn -B package -DskipTests
 
 # ==========================================================================
 # ETAPA 2 - EXECUÇÃO

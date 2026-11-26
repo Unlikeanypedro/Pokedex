@@ -28,7 +28,7 @@ import tools.jackson.databind.json.JsonMapper;
  *
  * Registra a conclusão da carga no banco. Uma carga interrompida pode
  * continuar na próxima inicialização, inserindo apenas documentos ausentes.
- * Pode ser desativado com app.seed.enabled=false.
+ * Ative a carga inicial com APP_SEED_ENABLED=true.
  */
 @Component
 public class DataSeeder implements CommandLineRunner {
@@ -40,7 +40,7 @@ public class DataSeeder implements CommandLineRunner {
 
     private final MongoTemplate mongoTemplate;
 
-    @Value("${app.seed.enabled:true}")
+    @Value("${app.seed.enabled:false}")
     private boolean habilitado;
 
     public DataSeeder(MongoTemplate mongoTemplate) {

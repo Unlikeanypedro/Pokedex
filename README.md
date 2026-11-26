@@ -17,6 +17,7 @@ expansão estão em [`docs/README.md`](docs/README.md).
 
 ## Sumário
 
+- [Executar com Docker Compose](#executar-com-docker-compose)
 - [Estrutura](#estrutura)
 - [Pré-requisitos](#pré-requisitos)
 - [Configuração do MongoDB](#configuração-do-mongodb)
@@ -27,6 +28,33 @@ expansão estão em [`docs/README.md`](docs/README.md).
 - [Coleções no MongoDB](#coleções-no-mongodb)
 - [Roteiro de validação](#roteiro-de-validação)
 - [Problemas comuns](#problemas-comuns)
+
+---
+
+## Executar com Docker Compose
+
+Com Docker e o plugin Compose instalados, [configure o MongoDB externo](#configuração-do-mongodb)
+no `.env` da raiz. Depois execute na raiz do repositório.
+
+```bash
+docker compose up --build --wait
+```
+
+Abra **http://localhost:5173**. O Compose sobe o frontend e o Spring Boot,
+que se conecta ao banco externo definido por `MONGODB_URI` e `MONGODB_DB`.
+Confira a conexão em **http://localhost:5173/api/status**.
+
+Se a porta `5173` estiver ocupada, defina `POKEDEX_PORT` no ambiente ou no
+`.env` da raiz e use a porta escolhida no navegador.
+
+```bash
+docker compose logs -f
+docker compose down
+```
+
+Os dados ficam no MongoDB externo. Ao trocar de uma versão que subia um
+MongoDB no Compose, rode `docker compose up --build --wait --remove-orphans`
+uma vez para remover o contêiner antigo.
 
 ---
 
@@ -50,6 +78,7 @@ Pokedex/
 │   ├── Dockerfile
 │   └── pom.xml
 ├── frontend/                 React 19 + Vite 8
+│   ├── Dockerfile
 │   └── src/
 │       ├── components/       Cards, lista, detalhes, busca, filtro e formulário
 │       ├── config/           URL base da API
@@ -60,6 +89,7 @@ Pokedex/
 │   ├── Script_Pokedex.sql    Fonte dos dados (Pokémon, tipos, treinadores)
 │   ├── README.md             Contexto e expansão do escopo
 │   └── Diagrama UML da Pokédex MongoDB.png
+├── compose.yaml              Inicialização do frontend e da API
 └── .env.example
 ```
 
@@ -67,23 +97,26 @@ Pokedex/
 
 ## Pré-requisitos
 
+O projeto usa um **MongoDB externo**, como o MongoDB Atlas. Para executar
+frontend e backend manualmente, instale os seguintes componentes.
+
 - **JDK 17 ou superior**. O Maven Wrapper baixa a versão do Maven usada pelo projeto.
 - **Node.js com npm**, nas versões compatíveis com o lockfile do Vite 8 (`^20.19.0 || >=22.12.0`).
-- **MongoDB Atlas** ou uma instância do **MongoDB local**.
 
 ---
 
 ## Configuração do MongoDB
 
-Na raiz do projeto, copie o arquivo de configuração de exemplo.
+Na raiz do projeto, se ainda não tiver um `.env`, copie o arquivo de exemplo.
 
 ```bash
 cp .env.example .env
 ```
 
-O Spring Boot lê o `.env` como um arquivo `.properties`. Preencha os valores sem
-aspas. Também é possível definir `MONGODB_URI` e `MONGODB_DB` no ambiente.
-Mantenha as credenciais no backend. O Git ignora o `.env`.
+Preencha `MONGODB_URI` com a URI do servidor externo e `MONGODB_DB` com o nome
+do banco que a Pokédex deve usar. Use valores sem aspas para que o mesmo arquivo
+funcione no Compose e no Spring Boot. O Git ignora o `.env`. Mantenha
+`APP_SEED_ENABLED=false` para usar o catálogo existente.
 
 ### MongoDB Atlas
 
@@ -96,15 +129,7 @@ Mantenha as credenciais no backend. O Git ignora o `.env`.
 ```properties
 MONGODB_URI=mongodb+srv://usuario:senha@cluster.exemplo.mongodb.net/?retryWrites=true&w=majority
 MONGODB_DB=pokedex
-```
-
-### MongoDB local
-
-Com o MongoDB rodando em `127.0.0.1:27017`, use estas configurações no `.env`.
-
-```properties
-MONGODB_URI=mongodb://127.0.0.1:27017
-MONGODB_DB=pokedex
+APP_SEED_ENABLED=false
 ```
 
 ---
@@ -125,9 +150,6 @@ Para conferir a conexão com o banco:
 curl http://localhost:8080/api/status
 # {"api":"online","mongodb":"online"}
 ```
-
-Na primeira execução, o `DataSeeder` popula o banco automaticamente
-(veja [Seed dos dados](#seed-dos-dados)).
 
 ---
 
@@ -254,10 +276,11 @@ O `DataSeeder` registra a conclusão da carga na coleção `seed_metadata`. Se a
 carga for interrompida, a próxima inicialização insere os documentos que
 faltam e preserva os registros existentes. Depois da conclusão, o catálogo
 continua vazio ao reiniciar se todos os Pokémon tiverem sido excluídos.
-Para desativar a carga automática, adicione esta configuração ao `.env` da raiz.
+A carga é opcional. Para popular um banco de teste vazio, altere esta
+configuração no `.env` da raiz antes de subir o backend.
 
 ```properties
-app.seed.enabled=false
+APP_SEED_ENABLED=true
 ```
 
 O tipo do Mew foi preenchido como `Psychic` (ID 11). A conversão também removeu
@@ -280,9 +303,10 @@ as entradas repetidas nos times de Koga e Lance.
 
 ## Roteiro de validação
 
-1. Use um banco vazio de teste, como `MONGODB_DB=pokedex_teste`. Suba o backend
-   e confira `mongodb: online` em `GET /api/status`. Na primeira carga, confira
-   151 Pokémon, 18 tipos e 12 treinadores com times.
+1. Use um banco vazio de teste, como `MONGODB_DB=pokedex_teste`, com
+   `APP_SEED_ENABLED=true`. Suba o backend e confira `mongodb: online` em
+   `GET /api/status`. Na primeira carga, confira 151 Pokémon, 18 tipos e 12
+   treinadores com times.
 2. Rode os [exemplos da API](#exemplos). Confira `200` nas consultas, `201` no
    cadastro, `200` na edição, `204` na exclusão e `404` na consulta do ID excluído.
    Reinicie o backend com o mesmo banco e confirme o `404` novamente.
@@ -302,5 +326,5 @@ as entradas repetidas nos times de Koga e Lance.
 | `503` ou `mongodb: offline` em `/api/status` | Confira a URI, as credenciais e a disponibilidade do banco. No Atlas, confira a lista de IPs permitidos. |
 | Erro de CORS no navegador | Origem do front fora de `app.cors.allowed-origins` |
 | `Port 8080 was already in use` | Já existe outra instância rodando; encerre-a ou use `--server.port=8081` |
-| Lista vazia na API | Confira `MONGODB_DB`, `app.seed.enabled` e o log do seed. Um catálogo esvaziado após a carga permanece vazio. |
+| Lista vazia na API | Confira `MONGODB_DB` e os dados do banco externo. Para popular um banco de teste vazio, use `APP_SEED_ENABLED=true`. |
 | `npm: command not found` ou aviso de versão do Node.js | Instale uma versão do Node.js com npm conforme os pré-requisitos. |
