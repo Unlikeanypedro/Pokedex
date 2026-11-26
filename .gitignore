@@ -1,5 +1,12 @@
+# Local environment files
 *.env
-*target
+.env.*
+!.env.example
 
-*node_modules
-*dist
+# Dependencies and build output
+target/
+node_modules/
+dist/
+
+# npm diagnostics
+npm-debug.log*
