@@ -6,8 +6,7 @@ RUN npm ci
 
 COPY index.html vite.config.js ./
 COPY src ./src
-# A barra é removida pela configuração da API, deixando as chamadas relativas.
-RUN VITE_API_URL=/ npm run build
+RUN npm run build
 
 FROM nginx:alpine
 COPY nginx.conf /etc/nginx/conf.d/default.conf

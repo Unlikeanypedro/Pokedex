@@ -163,8 +163,8 @@ npm run dev -- --strictPort
 
 Abra **http://localhost:5173**.
 
-O endereço padrão da API é `http://localhost:8080`. Para usar outro endereço,
-defina `VITE_API_URL` em `frontend/.env` antes de iniciar o Vite ou gerar o build.
+O frontend chama `/api` na mesma origem por padrão. Em desenvolvimento e na
+prévia, o Vite encaminha essas chamadas ao Spring Boot em `http://localhost:8080`.
 
 Build de produção:
 
@@ -173,13 +173,13 @@ npm run build
 npm run preview -- --strictPort
 ```
 
-A prévia fica em **http://localhost:4173**. Para liberar essa origem, adicione a
-linha abaixo ao `.env` da raiz e reinicie o backend. Use a origem exata que o
-navegador abre, incluindo a porta.
+A prévia fica em **http://localhost:4173**.
 
-```properties
-app.cors.allowed-origins=http://localhost:5173,http://localhost:4173
-```
+Para o deploy no Render com o `Dockerfile` da raiz, o Spring Boot serve o
+frontend em `/` e a API em `/api`. O build usa os caminhos relativos por padrão.
+Se o frontend for hospedado separadamente, defina `VITE_API_URL` com a origem do
+backend, como `https://seu-backend.onrender.com`, antes de gerar o build. Inclua
+a origem do frontend em `app.cors.allowed-origins` no backend.
 
 ---
 

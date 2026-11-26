@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Diz se a API está no ar e se o MongoDB Atlas responde.
  *
- * GET http://localhost:8080/            (útil para abrir a URL do Render no navegador)
- * GET http://localhost:8080/api/status  (usado pelo front-end)
+ * GET /api e GET /api/status retornam o status da API e do MongoDB.
+ * No deploy integrado, / serve o frontend.
  *
  * { "api": "online", "mongodb": "online" }
  */

@@ -16,9 +16,11 @@ npm run dev -- --strictPort
 
 Abra `http://localhost:5173` no navegador.
 
-O frontend usa `http://localhost:8080` como URL base da API. Para usar outro
-endereço, defina `VITE_API_URL` em `frontend/.env` antes de iniciar o frontend ou
-gerar o build. O Vite incorpora a URL ao build.
+O frontend chama `/api` na mesma origem por padrão. Em desenvolvimento e na
+prévia, o Vite encaminha essas requisições a `http://localhost:8080`.
+
+Para acessar um backend em outra origem, defina `VITE_API_URL` em `frontend/.env`
+antes de iniciar o Vite ou gerar o build. Use a origem do backend, sem `/api`.
 
 ```properties
 VITE_API_URL=http://localhost:8080
@@ -31,8 +33,8 @@ npm run build
 npm run preview -- --strictPort
 ```
 
-Abra `http://localhost:4173` depois de
-[liberar essa origem no backend](../README.md#como-executar-o-frontend).
+Abra `http://localhost:4173`. Para o deploy, consulte a
+[configuração do frontend](../README.md#como-executar-o-frontend).
 
 ## Dados
 

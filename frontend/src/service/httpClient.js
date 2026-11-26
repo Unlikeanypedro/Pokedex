@@ -25,7 +25,7 @@ export async function requisicao(caminho, opcoes = {}) {
         if (opcoes.signal?.aborted) throw erro;
 
         throw new Error(
-            `Não foi possível falar com o back-end em ${API_CONFIG.BASE_URL}. ` +
+            `Não foi possível falar com o back-end em ${url}. ` +
                 "Confira se o Spring Boot está rodando e se o CORS libera este endereço.",
         );
     }
