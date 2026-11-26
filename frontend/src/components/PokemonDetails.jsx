@@ -1,16 +1,9 @@
 import { useEffect, useRef } from 'react'
+import { statLabels } from '../utils/pokemonStats.js'
 import { getTypeColor } from '../utils/typeColors.js'
+import PokemonSprite from './PokemonSprite.jsx'
 
-const statLabels = [
-  ['hp', 'HP'],
-  ['attack', 'Ataque'],
-  ['defense', 'Defesa'],
-  ['specialAttack', 'Ataque Especial'],
-  ['specialDefense', 'Defesa Especial'],
-  ['speed', 'Velocidade'],
-]
-
-export default function PokemonDetails({ pokemon, erro, onClose }) {
+export default function PokemonDetails({ pokemon, erro, mensagem, onClose, onEdit }) {
   const closeButton = useRef(null)
 
   useEffect(() => {
@@ -41,11 +34,7 @@ export default function PokemonDetails({ pokemon, erro, onClose }) {
       >
         <div className="details-header">
           {pokemon && (
-            <img
-              className="details-portrait"
-              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
-              alt={pokemon.name}
-            />
+            <PokemonSprite id={pokemon.id} className="details-portrait" />
           )}
           <div className="details-title">
             {pokemon && (
@@ -60,6 +49,7 @@ export default function PokemonDetails({ pokemon, erro, onClose }) {
 
         {erro && <p role="alert">{erro}</p>}
         {!pokemon && !erro && <p role="status">Carregando detalhes…</p>}
+        {mensagem && <p className="pokemon-notice" role="status">{mensagem}</p>}
         {pokemon && (
           <>
             <div className="details-types">
@@ -88,6 +78,13 @@ export default function PokemonDetails({ pokemon, erro, onClose }) {
                 </div>
               ))}
             </div>
+            {onEdit && (
+              <div className="pokemon-actions">
+                <button className="pokemon-action" onClick={() => onEdit(pokemon)}>
+                  Editar Pokémon
+                </button>
+              </div>
+            )}
           </>
         )}
       </section>

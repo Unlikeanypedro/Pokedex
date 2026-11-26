@@ -234,6 +234,7 @@ body {
   color: var(--red);
   font-size: 0.78rem;
   font-weight: 800;
+  overflow-wrap: anywhere;
 }
 
 .pokemon-card h3 {
@@ -476,13 +477,125 @@ body {
   transform: translateY(-1px);
 }
 
-.team-chip img {
+.team-sprite {
   width: 32px;
   height: 32px;
   object-fit: contain;
   background: var(--screen);
   border-radius: 999px;
   padding: 2px;
+}
+
+.sprite-placeholder {
+  display: grid;
+  place-items: center;
+  background: var(--screen);
+  color: var(--paper);
+}
+
+.catalog-actions,
+.pokemon-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.catalog-actions .search {
+  flex: 1 1 260px;
+}
+
+.pokemon-actions {
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.pokemon-action {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--cream);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 700;
+  padding: 10px 16px;
+  cursor: pointer;
+}
+
+.pokemon-action.primary {
+  border-color: var(--red-dark);
+  background: var(--red-dark);
+  color: white;
+}
+
+.pokemon-action:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.pokemon-form-dialog {
+  width: min(680px, calc(100% - 32px));
+  color: var(--ink);
+}
+
+.pokemon-form-dialog::backdrop {
+  background: rgba(35, 35, 35, 0.62);
+}
+
+.pokemon-form-dialog h2 {
+  margin: 0 0 16px;
+}
+
+.pokemon-form-fields,
+.pokemon-form-types {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.pokemon-form-fields,
+.pokemon-form-stats,
+.pokemon-type-options {
+  display: grid;
+  gap: 12px;
+}
+
+.pokemon-form-stats,
+.pokemon-type-options {
+  grid-template-columns: repeat(auto-fit, minmax(min(120px, 100%), 1fr));
+}
+
+.pokemon-form-fields label {
+  display: grid;
+  gap: 4px;
+}
+
+.pokemon-form-fields input:not([type='checkbox']) {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font: inherit;
+}
+
+.pokemon-form-types legend {
+  padding: 0;
+  margin-bottom: 8px;
+}
+
+.pokemon-type-options label {
+  display: flex;
+  align-items: center;
+}
+
+.pokemon-notice {
+  border-radius: 12px;
+  background: var(--cream);
+  border: 1px solid var(--line);
+  padding: 10px 12px;
+}
+
+.pokemon-form-error {
+  color: var(--red-dark);
 }
 
 @media (max-width: 720px) {

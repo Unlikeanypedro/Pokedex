@@ -4,8 +4,14 @@ import SearchBar from './components/SearchBar.jsx'
 import TypeFilter from './components/TypeFilter.jsx'
 import PokemonList from './components/PokemonList.jsx'
 import PokemonDetails from './components/PokemonDetails.jsx'
+import PokemonForm from './components/PokemonForm.jsx'
 import TrainerList from './components/TrainerList.jsx'
-import { buscarPokemon, listarPokemons } from './service/pokemonService.js'
+import {
+  atualizarPokemon,
+  buscarPokemon,
+  criarPokemon,
+  listarPokemons,
+} from './service/pokemonService.js'
 import { listarTreinadores } from './service/trainerService.js'
 import { listarTipos } from './service/typeService.js'
 
@@ -29,6 +35,8 @@ export default function App() {
   const [treinadores, setTreinadores] = useState({})
   const [selecao, setSelecao] = useState(null)
   const [detalhes, setDetalhes] = useState({})
+  const [formulario, setFormulario] = useState(null)
+  const [mensagem, setMensagem] = useState('')
 
   useEffect(() => {
     const controller = new AbortController()
@@ -42,12 +50,38 @@ export default function App() {
   }, [])
 
   function selecionarPokemon(pokemon) {
+    setMensagem('')
     setSelecao({ id: pokemon.id })
   }
 
   const fecharDetalhes = useCallback(() => {
     setSelecao(null)
   }, [])
+
+  function abrirFormulario(pokemon = null) {
+    setMensagem('')
+    setFormulario({ pokemon })
+  }
+
+  async function salvarPokemon(dados) {
+    const pokemonEmEdicao = formulario.pokemon
+    const salvo = pokemonEmEdicao
+      ? await atualizarPokemon(pokemonEmEdicao.id, dados)
+      : await criarPokemon(dados)
+
+    setCatalogo(({ dados: pokemons }) => ({
+      dados: [...pokemons.filter(({ id }) => id !== salvo.id), salvo]
+        .sort((a, b) => a.name.localeCompare(b.name)),
+    }))
+    if (pokemonEmEdicao) {
+      setDetalhes({ dados: salvo, selecao })
+    } else {
+      setSearch('')
+      setSelectedType('All')
+    }
+    setMensagem(`${salvo.name} ${pokemonEmEdicao ? 'atualizado' : 'cadastrado'} com sucesso.`)
+    setFormulario(null)
+  }
 
   useEffect(() => {
     if (!selecao) return
@@ -93,6 +127,7 @@ export default function App() {
       <Header view={view} onChangeView={setView} />
 
       <main className="main">
+        {mensagem && !selecao && <p className="pokemon-notice" role="status">{mensagem}</p>}
         {erro ? (
           <div className="empty" role="alert">
             <h2>Falha ao carregar {view === 'pokemon' ? 'a Pokédex' : 'os treinadores'}</h2>
@@ -105,7 +140,16 @@ export default function App() {
         ) : view === 'pokemon' ? (
           <>
             <section className="controls">
-              <SearchBar value={search} onChange={setSearch} />
+              <div className="catalog-actions">
+                <SearchBar value={search} onChange={setSearch} />
+                <button
+                  className="pokemon-action primary"
+                  disabled={tipos.dados.length === 0}
+                  onClick={() => abrirFormulario()}
+                >
+                  Cadastrar Pokémon
+                </button>
+              </div>
               <TypeFilter
                 types={tipos.dados.map((tipo) => tipo.name)}
                 selectedType={selectedType}
@@ -138,11 +182,21 @@ export default function App() {
         )}
       </main>
 
-      {selecao && (
+      {selecao && !formulario && (
         <PokemonDetails
           pokemon={detalhesAtuais.dados}
           erro={detalhesAtuais.erro}
+          mensagem={mensagem}
           onClose={fecharDetalhes}
+          onEdit={tipos.dados?.length ? abrirFormulario : undefined}
+        />
+      )}
+      {formulario && (
+        <PokemonForm
+          pokemon={formulario.pokemon}
+          tipos={tipos.dados}
+          onSave={salvarPokemon}
+          onClose={() => setFormulario(null)}
         />
       )}
     </div>

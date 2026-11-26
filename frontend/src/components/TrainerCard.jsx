@@ -1,3 +1,5 @@
+import PokemonSprite from './PokemonSprite.jsx'
+
 export default function TrainerCard({ trainer, pokemonById, onSelectPokemon }) {
   return (
     <article className="trainer-card">
@@ -16,11 +18,7 @@ export default function TrainerCard({ trainer, pokemonById, onSelectPokemon }) {
               className="team-chip"
               onClick={() => onSelectPokemon(pokemon)}
             >
-              <img
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
-                alt={pokemon.name}
-                loading="lazy"
-              />
+              <PokemonSprite id={pokemon.id} className="team-sprite" lazy />
               #{String(pokemon.id).padStart(3, '0')} {pokemon.name}
             </button>
           ) : null

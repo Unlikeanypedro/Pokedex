@@ -1,4 +1,5 @@
 import { getTypeColor } from '../utils/typeColors.js'
+import PokemonSprite from './PokemonSprite.jsx'
 
 export default function PokemonCard({ pokemon, onSelect }) {
   const stats = pokemon.stats
@@ -6,12 +7,7 @@ export default function PokemonCard({ pokemon, onSelect }) {
   return (
     <button className="pokemon-card" onClick={() => onSelect(pokemon)}>
       <div className="card-top">
-        <img
-          className="pokemon-image"
-          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
-          alt={pokemon.name}
-          loading="lazy"
-        />
+        <PokemonSprite id={pokemon.id} className="pokemon-image" lazy />
         <div className="card-info">
           <span className="pokemon-id">#{String(pokemon.id).padStart(3, '0')}</span>
           <h3>{pokemon.name}</h3>
