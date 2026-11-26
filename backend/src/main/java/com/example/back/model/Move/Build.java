@@ -23,7 +23,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 
 @Document(collection = "pokemon_builds")
-public class PokemonBuild {
+public class Build {
 
     @Id
     private String id;
@@ -41,10 +41,10 @@ public class PokemonBuild {
     private List<String> moves;
 
     // Construtor vazio
-    public PokemonBuild() {}
+    public Build() {}
 
     // Construtor completo
-    public PokemonBuild(
+    public Build(
         String id,
         String pokemonId,
         String gameId,
