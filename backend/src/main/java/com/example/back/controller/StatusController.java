@@ -23,7 +23,7 @@ public class StatusController {
         this.statusService = statusService;
     }
 
-    @GetMapping({ "/api/status" })
+    @GetMapping({ "api", "/api/status" })
     public Map<String, String> status() {
         Map<String, String> resposta = new LinkedHashMap<>();
         resposta.put("api", "online");

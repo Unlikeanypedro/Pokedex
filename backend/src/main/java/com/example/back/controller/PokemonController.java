@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
  * | DELETE | /api/pokemons/{id}      | Exclui               | 204 / 404 |
  */
 @RestController
-@RequestMapping("/api/pokemons")
+@RequestMapping("/pokemons")
 public class PokemonController {
 
     private final PokemonService pokemonService;
@@ -33,7 +33,9 @@ public class PokemonController {
     // http://localhost:8080/api/pokemons
     // http://localhost:8080/api/pokemons?name=pikachu
     @GetMapping
-    public List<PokemonResponse> listar(@RequestParam(required = false) String name) {
+    public List<PokemonResponse> listar(
+        @RequestParam(required = false) String name
+    ) {
         return pokemonService.listar(name);
     }
 
@@ -44,13 +46,18 @@ public class PokemonController {
     }
 
     @PostMapping
-    public ResponseEntity<PokemonResponse> inserir(@RequestBody PokemonRequest pokemon) {
+    public ResponseEntity<PokemonResponse> inserir(
+        @RequestBody PokemonRequest pokemon
+    ) {
         PokemonResponse criado = pokemonService.inserir(pokemon);
         return ResponseEntity.status(HttpStatus.CREATED).body(criado);
     }
 
     @PutMapping("/{id}")
-    public PokemonResponse atualizar(@PathVariable String id, @RequestBody PokemonRequest pokemon) {
+    public PokemonResponse atualizar(
+        @PathVariable String id,
+        @RequestBody PokemonRequest pokemon
+    ) {
         return pokemonService.atualizar(id, pokemon);
     }
 

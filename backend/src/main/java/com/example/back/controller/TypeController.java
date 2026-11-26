@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /** GET /api/types -> lista de tipos (id + nome). */
 @RestController
-@RequestMapping("/api/types")
+@RequestMapping("/types")
 public class TypeController {
 
     private final TypeService typeService;
